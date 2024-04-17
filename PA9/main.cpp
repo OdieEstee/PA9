@@ -1,6 +1,8 @@
-#include <iostream>
+#include "Map.hpp"
 using namespace std;
 
 int main() {
-	cout << "Hello seb";
+	Map* map = new Map();
+	map->generateMap();
+	map->terminalPrint();
 }

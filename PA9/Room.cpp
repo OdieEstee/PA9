@@ -9,6 +9,55 @@ void Room::setType(int newType) {
 	setASCII();
 }
 
+void Room::setType(bool up, bool down, bool left, bool right) {
+	if (up && down && left && right) {
+		type = 1;
+	}
+	else if (up && down && !left && right) {
+		type = 2;
+	}
+	else if (up && down && left && !right) {
+		type = 3;
+	}
+	else if (up && !down && left && right) {
+		type = 4;
+	}
+	else if (!up && down && left && right) {
+		type = 5;
+	}
+	else if (up && down && !left && !right) {
+		type = 6;
+	}
+	else if (!up && !down && left && right) {
+		type = 7;
+	}
+	else if (up && !down && !left && right) {
+		type = 8;
+	}
+	else if (up && !down && left && !right) {
+		type = 9;
+	}
+	else if (!up && down && left && !right) {
+		type = 10;
+	}
+	else if (up && !down && !left && right) {
+		type = 11;
+	}
+	else if (up && !down && !left && !right) {
+		type = 12;
+	}
+	else if (!up && !down && !left && right) {
+		type = 13;
+	}
+	else if (!up && down && !left && !right) {
+		type = 14;
+	}
+	else if (!up && !down && left && !right) {
+		type = 15;
+	}
+	setASCII();
+}
+
 string Room::getASCII() const {
 	return ASCII;
 }

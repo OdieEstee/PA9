@@ -5,6 +5,7 @@ class Room {
 public:
 	int getType() const;
 	void setType(int newType);
+	void setType(bool up, bool down, bool left, bool right);
 	string getASCII() const;
 	void setASCII();
 	bool getUp();

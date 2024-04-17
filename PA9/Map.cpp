@@ -135,9 +135,7 @@ void Map::generateMap() {
 			//Fix error if present
 			if (!fits) {
 				cout << "Error at: " << i << " " << j << endl;
-				while (!(up && down && left && right)) {
-
-				}
+				floor[i][j].setType(!up, !down, !left, !right);
 			}
 		}
 	}
