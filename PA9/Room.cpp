@@ -10,7 +10,10 @@ void Room::setType(int newType) {
 }
 
 void Room::setType(bool up, bool down, bool left, bool right) {
-	if (up && down && left && right) {
+	if (!up && !down && !left && !right) {
+		return;
+	}
+	else if (up && down && left && right) {
 		type = 1;
 	}
 	else if (up && down && !left && right) {
