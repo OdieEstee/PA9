@@ -171,3 +171,11 @@ bool Room::getHasPlayer() const {
 void Room::setHasPlayer(bool newHasPlayer) {
 	hasPlayer = newHasPlayer;
 }
+
+bool Room::getHasStairs() const {
+	return hasStairs;
+}
+
+void Room::setHasStairs(bool newHasStairs) {
+	hasStairs = newHasStairs;
+}

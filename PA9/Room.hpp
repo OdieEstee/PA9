@@ -14,6 +14,8 @@ public:
 	bool getRight() const;
 	bool getHasPlayer() const;
 	void setHasPlayer(bool newHasPlayer);
+	bool getHasStairs() const;
+	void setHasStairs(bool newHasStairs);
 private:
 	int type;
 	string ASCII;
@@ -22,4 +24,5 @@ private:
 	bool left;
 	bool right;
 	bool hasPlayer;
+	bool hasStairs;
 };

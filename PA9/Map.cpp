@@ -5,7 +5,6 @@ Map::Map() {
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			floor[i][j].setType(0);
-			floor[i][j].setHasPlayer(false);
 		}
 	}
 	loadRoomTextures();
@@ -58,7 +57,6 @@ void Map::loadRoomTextures() {
 	sf::Texture room15;
 	room15.loadFromFile("MapTextures/Room15.png");
 	roomTextures[14] = room15;
-	cout << "LOADED TEXTURES" << endl;
 }
 
 sf::Texture Map::getTexture(int number) {
@@ -73,8 +71,11 @@ void Map::generateMap() {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				floor[i][j].setType(0);
+				floor[i][j].setHasStairs(false);
+				floor[i][j].setHasPlayer(false);
 			}
 		}
+		floor[0][2].setHasPlayer(true);
 		srand(time(nullptr));
 		int row = 0;
 		int col = 2;
@@ -192,9 +193,18 @@ void Map::generateMap() {
 			for (int j = 0; j < 5; j++) {
 				if ((i != 0 && floor[i - 1][j].getDown() && !floor[i][j].getUp()) || (i != 4 && floor[i + 1][j].getUp() && !floor[i][j].getDown()) || (j != 0 && floor[i][j - 1].getRight() && !floor[i][j].getLeft()) || (j != 4 && floor[i][j + 1].getLeft() && !floor[i][j].getRight())) {
 					validMap = false;
-					cout << "INVALID MAP\n";
 				}
 			}
+		}
+	}
+	//Add stairs
+	bool validRoom = false;
+	while (!validRoom) {
+		int row = rand() % 5;
+		int col = rand() % 5;
+		if (floor[row][col].getType() != 0) {
+			floor[row][col].setHasStairs(true);
+			validRoom = true;
 		}
 	}
 }
@@ -206,11 +216,17 @@ void Map::terminalPrint() {
 		for (int j = 0; j < 9; j += 3) {
 			//For-loop for columns
 			for (int k = 0; k < 5; k++) {
-				cout << floor[i][k].getASCII()[j] << floor[i][k].getASCII()[j + 1] << floor[i][k].getASCII()[j + 2] << " ";
+				if (j == 3 && floor[i][k].getHasStairs()) {
+					cout << floor[i][k].getASCII()[j] << "S" << floor[i][k].getASCII()[j + 2] << " ";
+				}
+				else {
+					cout << floor[i][k].getASCII()[j] << floor[i][k].getASCII()[j + 1] << floor[i][k].getASCII()[j + 2] << " ";
+				}
 			}
 			cout << endl;
 		}
 	}
+	cout << endl;
 }
 
 Room Map::getRoom(int row, int col) {
