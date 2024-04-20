@@ -8,10 +8,12 @@ public:
 	void setType(bool up, bool down, bool left, bool right);
 	string getASCII() const;
 	void setASCII();
-	bool getUp();
-	bool getDown();
-	bool getLeft();
-	bool getRight();
+	bool getUp() const;
+	bool getDown() const;
+	bool getLeft() const;
+	bool getRight() const;
+	bool getHasPlayer() const;
+	void setHasPlayer(bool newHasPlayer);
 private:
 	int type;
 	string ASCII;
@@ -19,4 +21,5 @@ private:
 	bool down;
 	bool left;
 	bool right;
+	bool hasPlayer;
 };

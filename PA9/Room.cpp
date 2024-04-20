@@ -148,18 +148,26 @@ void Room::setASCII() {
 	}
 }
 
-bool Room::getUp() {
+bool Room::getUp() const {
 	return up;
 }
 
-bool Room::getDown() {
+bool Room::getDown() const {
 	return down;
 }
 
-bool Room::getLeft() {
+bool Room::getLeft() const {
 	return left;
 }
 
-bool Room::getRight() {
+bool Room::getRight() const {
 	return right;
+}
+
+bool Room::getHasPlayer() const {
+	return hasPlayer;
+}
+
+void Room::setHasPlayer(bool newHasPlayer) {
+	hasPlayer = newHasPlayer;
 }

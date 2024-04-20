@@ -1,8 +1,9 @@
-#include "Map.hpp"
+#include "Game.hpp"
+
 using namespace std;
 
 int main() {
-	Map* map = new Map();
-	map->generateMap();
-	map->terminalPrint();
+    Game game;
+    game.run();
+    return 0;
 }
