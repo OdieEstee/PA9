@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 class MeleeEnemy {
 private:
 	sf::Sprite sprite;
