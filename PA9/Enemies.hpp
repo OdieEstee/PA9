@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 class MeleeEnemy {
@@ -15,14 +16,14 @@ private:
 	int health;
 	int damage;
 public:
-	MeleeEnemy(const std::string& textureFile, int health, int damage) {
+	MeleeEnemy(const string& textureFile, int health, int damage) {
 		this->health = health;
 		this->damage = damage;
 	}
-	int getHealth() {
+	int getHealth() const {
 		return health;
 	}
-	int getDamage() {
+	int getDamage() const {
 		return damage;
 	}
 	void setHealth(int health) {
@@ -54,13 +55,13 @@ public:
 		this->damage = damage;
 		this->range = range;
 	}
-	int getHealth() {
+	int getHealth() const {
 		return health;
 	}
-	int getDamage() {
+	int getDamage() const {
 		return damage;
 	}
-	float getRange() {
+	float getRange() const {
 		return range;
 	}
 	void setHealth(int health) {
@@ -83,7 +84,7 @@ public:
 	}
 	void RangeAttack() {
 		Projectile newProjectile();
-		projectiles.push_back(newProjectile);
+		projectiles.push_back(newProjectile());
 	}
 	void ProjectileUpdate() {
 		for (auto& projectile : projectiles) {
@@ -102,10 +103,10 @@ public:
 		this->speed = speed;
 		this->direction = direction;
 	}
-	float getSpeed() {
+	float getSpeed() const {
 		return speed;
 	}
-	sf::Vector2f getDirection() {
+	sf::Vector2f getDirection() const {
 		return direction;
 	}
 	void setSpeed(float speed) {

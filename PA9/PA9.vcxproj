@@ -129,14 +129,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Jacob\OneDrive\Desktop\CSFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jacob\OneDrive\Desktop\SFML-2.6.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Jacob\OneDrive\Desktop\CSFML\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jacob\OneDrive\Desktop\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-2-d.lib; sfml-window-2-d.lib; sfml-audio-2-d.lib; sfml-network-2-d.lib; sfml-system-2-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,15 +148,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Jacob\OneDrive\Desktop\CSFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jacob\OneDrive\Desktop\SFML-2.6.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Jacob\OneDrive\Desktop\CSFML\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>csmfl-graphics-s.lib; csfml-window-s.lib; csfml-audio-s.lib; csfml-network-s.lib; csfml-system-s.lib; opengl64/lib; freetype.lib; winmm.lib; gdi64.lib; openal64.lib; flac.lib; vorbisenc.lib; vorbisfile.lib; vorbis.lib; ogg.lib; ws2_64.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Jacob\OneDrive\Desktop\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s.lib; sfml-window-s.lib; sfml-audio-s.lib; sfml-network-s.lib; sfml-system-s.lib; opengl64.lib; freetype.lib; openal64.lib; winmm.lib; gdi64.lib; flac.lib; vorbisenc.lib; vorbisfile.lib; vorbis.lib; ogg.lib; ws2_64.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
