@@ -5,7 +5,8 @@
 #include <SFML/Network.hpp>
 #include <string>
 #include <iostream>
-
+#include <vector>
+using namespace std;
 
 class MeleeEnemy {
 private:
@@ -14,7 +15,7 @@ private:
 	int health;
 	int damage;
 public:
-	MeleeEnemy(std::string& textureFile, int health, int damage) {
+	MeleeEnemy(const std::string& textureFile, int health, int damage) {
 		this->health = health;
 		this->damage = damage;
 	}
@@ -45,10 +46,10 @@ private:
 	int health;
 	int damage;
 	float range;
-	std::vector<Projectile> projectiles;
+	vector<Projectile> projectiles;
 
 public:
-	RangedEnemy(std::string& texture, int health, int damage, float range) {
+	RangedEnemy(const string& texture, int health, int damage, float range) {
 		this->health = health;
 		this->damage = damage;
 		this->range = range;
@@ -90,6 +91,7 @@ public:
 		}
 	}
 };
+
 class Projectile {
 private:
 	sf::Sprite sprite;
