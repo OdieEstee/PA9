@@ -21,7 +21,7 @@ void Bullet::update() {
 }
 
 void Bullet::draw(sf::RenderWindow& window) {
-	window.draw(bullet);
+	window.draw(bullet); 
 }
 
 bool Bullet::isOutOfBounds(sf::RenderWindow& window) { 
