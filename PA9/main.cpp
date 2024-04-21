@@ -1,9 +1,9 @@
-#include "player.hpp" 
-#include "bullet.hpp"
+#include "Game.hpp"
 
-int main() { 
+using namespace std;
 
-   
-
+int main() {
+    Game game;
+    game.run();
     return 0;
 }
