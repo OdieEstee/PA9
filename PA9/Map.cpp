@@ -71,6 +71,7 @@ void Map::generateMap() {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				floor[i][j].setType(0);
+				floor[i][j].clearObjects();
 				floor[i][j].setHasStairs(false);
 				floor[i][j].setHasPlayer(false);
 			}
@@ -231,4 +232,13 @@ void Map::terminalPrint() {
 
 Room Map::getRoom(int row, int col) {
 	return floor[row][col];
+}
+
+void Map::generateObjects() {
+	Obstacle* rock = new Obstacle;
+	rock->setTexture("MapTextures/Rock.png");
+	rock->setScale(.5, .5);
+	rock->setPos(rand() % 500, rand() % 500);
+	floor[0][2].pushObjects(rock);
+	
 }

@@ -179,3 +179,16 @@ bool Room::getHasStairs() const {
 void Room::setHasStairs(bool newHasStairs) {
 	hasStairs = newHasStairs;
 }
+
+void Room::pushObjects(Object* object) {
+	objects.push_back(object);
+}
+vector<Object*> Room::getObjects() const {
+	return objects;
+}
+
+void Room::clearObjects() {
+	for (int i = 0; i < objects.size(); i++) {
+		objects.pop_back();
+	}
+}

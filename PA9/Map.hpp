@@ -11,6 +11,7 @@ public:
 	void loadRoomTextures();
 	void generateMap();
 	void terminalPrint();
+	void generateObjects();
 	sf::Texture getTexture(int number);
 	Room getRoom(int row, int col);
 

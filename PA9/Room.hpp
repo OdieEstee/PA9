@@ -1,5 +1,6 @@
 using namespace std;
-#include <string>
+#include <vector>
+#include "Obstacle.hpp"
 
 class Room {
 public:
@@ -16,6 +17,9 @@ public:
 	void setHasPlayer(bool newHasPlayer);
 	bool getHasStairs() const;
 	void setHasStairs(bool newHasStairs);
+	void pushObjects(Object* object);
+	vector<Object*> getObjects() const;
+	void clearObjects();
 private:
 	int type;
 	string ASCII;
@@ -25,4 +29,5 @@ private:
 	bool right;
 	bool hasPlayer;
 	bool hasStairs;
+	vector<Object*> objects;
 };
