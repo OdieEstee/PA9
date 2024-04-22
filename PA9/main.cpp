@@ -3,12 +3,15 @@
 int main()
 {
     std::vector<int> myVector;
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Nightmare");
+
+    sf::Vector2<float> direction(0.0f, 1.0f);
+
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "PA9");
 
     //Placeholder1 and 2 are for the pictures of the enemies
-    MeleeEnemy meleeEnemy("placeholder1", 100, 10);
+    InheritMeleeEnemy meleeEnemy("placeholder1", 100, 10);
 
-    RangedEnemy rangedEnemy("placeholder2", 100, 5, 200.0f);
+    InheritRangedEnemy rangedEnemy("placeholder2", 100, 5, 200.0f);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -29,7 +32,7 @@ int main()
 
         rangedEnemy.move(0.0f, 1.0f);
 
-        rangedEnemy.RangeAttack();
+        rangedEnemy.rangedAttack();
 
         rangedEnemy.draw(window);
 

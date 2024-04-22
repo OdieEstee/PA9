@@ -6,7 +6,7 @@ using namespace std;
 
 
 class BaseEnemy {
-protected: 
+protected:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	int health;
@@ -22,6 +22,9 @@ public:
 	}
 	int getDamage() const {
 		return damage;
+	}
+	const sf::Sprite getSprite() const {
+		return sprite;
 	}
 	void setHealth(int health) {
 		this->health = health;
@@ -40,27 +43,71 @@ public:
 class InheritMeleeEnemy : public BaseEnemy {
 public:
 	InheritMeleeEnemy(const std::string& textureFile, int health, int damage) : BaseEnemy(textureFile, health, damage) {}
+	int getHealth() const {
+		return health;
+	}
+	int getDamage() const {
+		return damage;
+	}
+	const sf::Sprite getSprite() const {
+		return sprite;
+	}
+	int setHealth(int health) {
+		this->health = health;
+	}
+	int setDamage(int damage) {
+		this->damage = damage;
+	}
+	void setSprite(sf::Sprite sprite) {
+		this->sprite = sprite;
+	}
+	virtual void move(float offsetX, float offsetY) {
+		sprite.move(offsetX, offsetY);
+	}
+	virtual void move(sf::RenderWindow& window) {
+		window.draw(sprite);
+	}
 };
+
 
 class InheritRangedEnemy : public BaseEnemy {
 private:
 	float attackRange;
 	std::vector<Projectile> projectiles;
-public: 
+public:
 	InheritRangedEnemy(const std::string& textureFile, int health, int damage, float attackRange) : BaseEnemy(textureFile, health, damage), attackRange(attackRange) {}
 	void rangedAttack() {
-		Projectile newProjectile("texture.png", 1.0f, sf::Vector2f(1.0f, 0.0f));
+		Projectile newProjectile("projectilepng", 1.0f, sf::Vector2f(1.0f, 0.0f));
 		projectiles.push_back(newProjectile);
 	}
-	void updateProjectiles(float deltaTime, std::vector<MeleeEnemy>& meleeEnemies) {
-		for (auto& projectile : projectiles) {
-			sf::Vector2f direction = projectile.getDirection();
-			float speed = projectile.getSpeed();
-			projectile.move(speed * direction.x * deltaTime, speed * direction.y * deltaTime);
-			for (auto& enemy : meleeEnemies) {
-				if (projectile.getSprite().getGlobalBounds().intersects(enemy.getSprite().getGlobalBounds())) {
-					//player character health down by int damage
+	virtual void move(float offsetX, float offsetY) {
+		sprite.move(offsetX, offsetY);
+	}
+	const sf::Sprite getSprite() const {
+		return sprite;
+	}
+	void setSprite(sf::Sprite sprite) {
+		this->sprite = sprite;
+	}
+	
+	void updateProjectiles(float deltaTime, vector<BaseEnemy>& meleeEnemies) {
+		for (auto it = projectiles.begin(); it != projectiles.end(); ) {
+			sf::Vector2f direction = it->getDirection();
+			float speed = it->getSpeed();
+			it->move();
+			bool hasCollided = false;
+			for (auto& BaseEnemy : meleeEnemies) {
+				if (it->getSprite().getGlobalBounds().intersects(BaseEnemy.getSprite().getGlobalBounds())) {
+					BaseEnemy.setHealth(BaseEnemy.getHealth() - this->getDamage());
+					hasCollided = true;
+					break;
 				}
+			}
+			if (hasCollided) {
+				it = projectiles.erase(it);
+			}
+			else {
+				++it;
 			}
 		}
 	}
@@ -166,6 +213,9 @@ public:
 	sf::Vector2f getDirection() const {
 		return direction;
 	}
+	const sf::Sprite getSprite() const {
+		return sprite;
+	}
 	void setSpeed(float speed) {
 		this->speed = speed;
 	}
@@ -173,9 +223,20 @@ public:
 		this->direction = direction;
 	}
 	void move() {
-		sprite.move(speed * direction);
+		sprite.move(speed * direction.x, speed * direction.y);
 	}
 	void draw(sf::RenderWindow& window) {
 		window.draw(sprite);
 	}
+	void setSprite(sf::Sprite sprite) {
+		this->sprite = sprite;
+	}
 };
+
+
+/* 
+
+If you want to uninclude the inheritance of melee and ranged enemies from base, un-comment the melee and ranged base classes and comment out the InheritMelee, InheritRanged, and BaseEnemy
+ make sure to add the appropriate changes from the Inherit into the uninheriting functions so that it runs the same
+
+*/
