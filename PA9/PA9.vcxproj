@@ -188,10 +188,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
+    <ClCompile Include="EnemyProjectiles.cpp" />
+    <ClCompile Include="RangedEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemies.hpp" />
+    <ClInclude Include="BaseEnemy.hpp" />
+    <ClInclude Include="MeleeEnemy.hpp" />
+    <ClInclude Include="EnemyProjectiles.hpp" />
+    <ClInclude Include="RangedEnemy.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
