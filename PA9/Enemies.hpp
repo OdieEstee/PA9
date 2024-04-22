@@ -1,16 +1,72 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <string>
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
 
-class MeleeEnemy {
+class BaseEnemy {
+protected: 
+	sf::Sprite sprite;
+	sf::Texture texture;
+	int health;
+	int damage;
+public:
+	BaseEnemy(const std::string& textureFile, int health, int damage) {
+		sprite.setTexture(texture);
+		this->health = health;
+		this->damage = damage;
+	}
+	int getHealth() const {
+		return health;
+	}
+	int getDamage() const {
+		return damage;
+	}
+	void setHealth(int health) {
+		this->health = health;
+	}
+	void setDamage(int damage) {
+		this->damage = damage;
+	}
+	virtual void move(float offsetX, float offsetY) {
+		sprite.move(offsetX, offsetY);
+	}
+	virtual void draw(sf::RenderWindow& window) {
+		window.draw(sprite);
+	}
+};
+
+class InheritMeleeEnemy : public BaseEnemy {
+public:
+	InheritMeleeEnemy(const std::string& textureFile, int health, int damage) : BaseEnemy(textureFile, health, damage) {}
+};
+
+class InheritRangedEnemy : public BaseEnemy {
+private:
+	float attackRange;
+	std::vector<Projectile> projectiles;
+public: 
+	InheritRangedEnemy(const std::string& textureFile, int health, int damage, float attackRange) : BaseEnemy(textureFile, health, damage), attackRange(attackRange) {}
+	void rangedAttack() {
+		Projectile newProjectile("texture.png", 1.0f, sf::Vector2f(1.0f, 0.0f));
+		projectiles.push_back(newProjectile);
+	}
+	void updateProjectiles(float deltaTime, std::vector<MeleeEnemy>& meleeEnemies) {
+		for (auto& projectile : projectiles) {
+			sf::Vector2f direction = projectile.getDirection();
+			float speed = projectile.getSpeed();
+			projectile.move(speed * direction.x * deltaTime, speed * direction.y * deltaTime);
+			for (auto& enemy : meleeEnemies) {
+				if (projectile.getSprite().getGlobalBounds().intersects(enemy.getSprite().getGlobalBounds())) {
+					//player character health down by int damage
+				}
+			}
+		}
+	}
+};
+
+/*class MeleeEnemy {
 private:
 	sf::Sprite sprite;
 	sf::Texture texture;
@@ -84,7 +140,7 @@ public:
 		}
 	}
 	void RangeAttack() {
-		Projectile newProjectile();
+	Projectile newProjectile("projectile.png", 1.0f, sf::Vector2f(1.0f, 0.0f));
 		projectiles.push_back(newProjectile());
 	}
 	void ProjectileUpdate() {
@@ -92,7 +148,7 @@ public:
 			projectile.move();
 		}
 	}
-};
+};*/
 
 class Projectile {
 private:

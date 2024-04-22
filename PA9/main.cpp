@@ -2,6 +2,7 @@
 
 int main()
 {
+    std::vector<int> myVector;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Nightmare");
 
     //Placeholder1 and 2 are for the pictures of the enemies
