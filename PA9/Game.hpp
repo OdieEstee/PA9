@@ -1,4 +1,5 @@
-#include "Map.hpp"
+#include "player.hpp"
+#include "bullet.hpp"
 
 class Game {
 public:

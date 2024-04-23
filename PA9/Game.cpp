@@ -1,12 +1,10 @@
 #include "Game.hpp"
-#include "player.hpp"
-#include "bullet.hpp"
 
 void Game::run() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Adventure");
     window.setFramerateLimit(60);
 
-    map = new Map();
+    map = new Map(); 
     map->generateMap();
     map->terminalPrint();
     sf::Sprite floor;
@@ -35,21 +33,36 @@ void Game::run() {
             andy.shoot();
         }
         
-        andy.update(window);
+        andy.update(window, map->getRoom(currentRow, currentCol));   
 
         sf::Vector2f andyPos = andy.getPosition();
 
         if (andyPos.x <= 0) {
             if (map->getRoom(currentRow, currentCol).getLeft()) {
                 currentCol--;
+                andy.setPosition(1680, 400);
             }
-            
+        } else if (andyPos.x >= 1710) {
+            if (map->getRoom(currentRow, currentCol).getRight()) {
+                currentCol++;
+                andy.setPosition(85, 400);
+            }
+        }
+        else if (andyPos.y <= 0) {
+            if (map->getRoom(currentRow, currentCol).getUp()) {
+                currentRow--;
+                andy.setPosition(900, 800);
+            }
+        }
+        else if (andyPos.y >= 810) {
+            if (map->getRoom(currentRow, currentCol).getDown()) {
+                currentRow++; 
+                andy.setPosition(900, 0); 
+            }
         }
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
-        
-        cout << andyPos.x << endl;
 
         window.clear();
         window.draw(floor);

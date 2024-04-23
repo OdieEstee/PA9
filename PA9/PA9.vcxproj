@@ -205,7 +205,6 @@
     <ClCompile Include="EnemyProjectiles.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="main2.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="Object.cpp" />
