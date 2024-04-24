@@ -70,9 +70,10 @@ void Game::run() {
             }
         }
 
-        if (andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
+        if (map->getRoom(currentRow, currentCol).getHasStairs() && andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-
+                map->generateMap();
+                map->generateObjects();
             }
         } 
 
