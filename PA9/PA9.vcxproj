@@ -189,7 +189,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseEnemy.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="EnemyMain.cpp" />
     <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="EnemyProjectiles.cpp" />
     <ClCompile Include="RangedEnemy.cpp" />
