@@ -203,7 +203,7 @@ void Map::generateMap() {
 	while (!validRoom) {
 		int row = rand() % 5;
 		int col = rand() % 5;
-		if (floor[row][col].getType() != 0) {
+		if (floor[row][col].getType() != 0 && row != 0 && col != 2) {
 			floor[row][col].setHasStairs(true);
 			validRoom = true;
 		}
@@ -238,10 +238,6 @@ void Map::generateObjects() {
 	int choose;
 	sf::Texture* rockTexture = new sf::Texture;
 	rockTexture->loadFromFile("textures/Object - Rock.png");
-	sf::Texture* hLogTexture = new sf::Texture;
-	hLogTexture->loadFromFile("textures/Object - Log.png");
-	sf::Texture* vLogTexture = new sf::Texture;
-	vLogTexture->loadFromFile("textures/Object - Log - verticle.png");
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			if (!floor[i][j].getHasStairs() && !(i == 0 && j == 2)) {
@@ -253,22 +249,6 @@ void Map::generateObjects() {
 					rock->setScale(1, 1);
 					rock->setPos(rand() % 1300 + 200, rand() % 400 + 100);
 					floor[i][j].pushObjects(rock);
-				}
-				if (choose == 2) {
-					Obstacle* hLog = new Obstacle;
-
-					hLog->setTexture(hLogTexture);
-					hLog->setScale(3, 3);
-					hLog->setPos(rand() % 1200 + 200, rand() % 400 + 100);
-					floor[i][j].pushObjects(hLog);
-				}
-				if (choose == 3) {
-					Obstacle* vLog = new Obstacle;
-
-					vLog->setTexture(vLogTexture);
-					vLog->setScale(3, 3);
-					vLog->setPos(rand() % 1200 + 200, rand() % 400 + 100);
-					floor[i][j].pushObjects(vLog);
 				}
 			}
 		}
