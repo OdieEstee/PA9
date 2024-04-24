@@ -4,11 +4,10 @@ using namespace std;
 
 class Object {
 public:
-	virtual void setTexture(string path) final;
+	virtual void setTexture(sf::Texture* texture) final;
 	virtual sf::Sprite getSprite() const final;
 	virtual void setScale(float x, float y) final;
 	virtual void setPos(int x, int y) final;
 private:
 	sf::Sprite sprite;
-	sf::Texture texture;
 };

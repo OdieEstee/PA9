@@ -7,6 +7,7 @@ void Game::run() {
     map = new Map(); 
     map->generateMap();
     map->terminalPrint();
+    map->generateObjects();
     sf::Sprite floor;
     sf::Texture current;
     int currentRow = 0;
@@ -66,6 +67,9 @@ void Game::run() {
 
         window.clear();
         window.draw(floor);
+        for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
+            window.draw(object->getSprite());
+        }
         andy.draw(window);
         window.display();
     }

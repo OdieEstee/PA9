@@ -235,10 +235,43 @@ Room Map::getRoom(int row, int col) {
 }
 
 void Map::generateObjects() {
-	Obstacle* rock = new Obstacle;
-	rock->setTexture("MapTextures/Rock.png");
-	rock->setScale(.5, .5);
-	rock->setPos(rand() % 500, rand() % 500);
-	floor[0][2].pushObjects(rock);
-	
+	int choose;
+	sf::Texture* rockTexture = new sf::Texture;
+	rockTexture->loadFromFile("textures/Object - Rock.png");
+	sf::Texture* hLogTexture = new sf::Texture;
+	hLogTexture->loadFromFile("textures/Object - Log.png");
+	sf::Texture* vLogTexture = new sf::Texture;
+	vLogTexture->loadFromFile("textures/Object - Log - verticle.png");
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			if ((rand() % 100) < 101) {
+				choose = (rand() % 3) + 1;
+				
+				if (choose == 1) {
+					Obstacle* rock = new Obstacle;
+
+					rock->setTexture(rockTexture);
+					rock->setScale(1, 1);
+					rock->setPos(rand() % 1500 + 200, rand() % 400 + 100);
+					floor[i][j].pushObjects(rock);
+				}
+				if (choose == 2) {
+					Obstacle* hLog = new Obstacle;
+
+					hLog->setTexture(hLogTexture);
+					hLog->setScale(3, 3);
+					hLog->setPos(rand() % 1300 + 200, rand() % 400 + 100);
+					floor[i][j].pushObjects(hLog);
+				}
+				if (choose == 3) {
+					Obstacle* vLog = new Obstacle;
+
+					vLog->setTexture(vLogTexture);
+					vLog->setScale(3, 3);
+					vLog->setPos(rand() % 1300 + 200, rand() % 400 + 100);
+					floor[i][j].pushObjects(vLog);
+				}
+			}
+		}
+	}
 }

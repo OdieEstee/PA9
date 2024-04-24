@@ -1,8 +1,7 @@
 #include "Object.hpp";
 
-void Object::setTexture(string path) {
-	texture.loadFromFile(path);
-	sprite.setTexture(texture);
+void Object::setTexture(sf::Texture* texture) {
+	sprite.setTexture(*texture);
 }
 
 sf::Sprite Object::getSprite() const {
