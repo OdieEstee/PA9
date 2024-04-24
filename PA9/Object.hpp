@@ -1,5 +1,5 @@
 using namespace std;
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include <string>
 
 class Object {
