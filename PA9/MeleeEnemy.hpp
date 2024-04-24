@@ -1,9 +1,12 @@
+#ifndef MELEEENEMY_HPP
+#define MELEEENEMY_HPP
 #include "BaseEnemy.hpp"
 
-class MeleeEnemy : public BaseEnemy {
+class meleeEnemy : public BaseEnemy {
 public:
-	BaseEnemy meleeEnemy(sf::Sprite enemySprite, int meleeHealth, int meleeDamage) {
-
+	BaseEnemy MeleeEnemy(sf::Sprite enemySprite, int meleeHealth, int meleeDamage) {
+		enemyTexture.loadFromFile("textures/Dog - Still - Down.png");
+		enemySprite.setTexture(enemyTexture);
 	}
 	int setHealth() const {
 		return health;
@@ -24,3 +27,4 @@ public:
 		this->enemySprite = enemySprite;
 	}
 };
+#endif

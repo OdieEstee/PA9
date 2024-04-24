@@ -1,3 +1,5 @@
+#ifndef BASEENEMY_HPP
+#define BASEENEMY_HPP
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -9,9 +11,6 @@ protected:
 	sf::Sprite enemySprite;
 	sf::Texture enemyTexture;
 public:
-	BaseEnemy baseEnemy(sf::Sprite enemySprite, int health, int damage) {
-
-	}
 	int getHealth() const {
 		return health;
 	}
@@ -31,3 +30,4 @@ public:
 		this->enemySprite = enemySprite;
 	}
 };
+#endif

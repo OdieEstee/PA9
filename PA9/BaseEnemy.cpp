@@ -1,6 +1,6 @@
 #include "BaseEnemy.hpp"
 
-class BaseEnemy {
+class baseEnemy {
 protected:
 	int health;
 	int damage;
