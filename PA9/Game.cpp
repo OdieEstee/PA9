@@ -1,99 +1,72 @@
 #include "Game.hpp"
 
 void Game::run() {
-    map = new Map();
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Adventure");
+    window.setFramerateLimit(60);
+
+    map = new Map(); 
     map->generateMap();
-    map->generateObjects();
     map->terminalPrint();
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Game");
     sf::Sprite floor;
     sf::Texture current;
-    window.setKeyRepeatEnabled(false);
     int currentRow = 0;
     int currentCol = 2;
-    while (window.isOpen())
-    {
+
+    Andy andy(850, 200, 100);
+    vector<Bullet> bullets;
+    sf::Clock bulletClock;
+    sf::Time bulletCooldown;
+
+    //Game loop
+    while (window.isOpen()) {
+
         sf::Event event;
-        current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
-        floor.setTexture(current);
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            else if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Left) {
-                    if (map->getRoom(currentRow, currentCol).getLeft()) {
-                        current = map->getTexture((map->getRoom(currentRow, currentCol - 1).getType()) - 1);
-                        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-                            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                                object->getSprite().setColor(sf::Color::Transparent);
-                            }
-                        }
-                        floor.setTexture(current);
-                        currentCol--;
-                    }
-                }
-                if (event.key.code == sf::Keyboard::Right) {
-                    if (map->getRoom(currentRow, currentCol).getRight()) {
-                        current = map->getTexture((map->getRoom(currentRow, currentCol + 1).getType()) - 1);
-                        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-                            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                                object->getSprite().setColor(sf::Color::Transparent);
-                            }
-                        }
-                        floor.setTexture(current);
-                        currentCol++;
-                    }
-                }
-                if (event.key.code == sf::Keyboard::Up) {
-                    if (map->getRoom(currentRow, currentCol).getUp()) {
-                        current = map->getTexture((map->getRoom(currentRow - 1, currentCol).getType()) - 1);
-                        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-                            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                                object->getSprite().setColor(sf::Color::Transparent);
-                            }
-                        }
-                        floor.setTexture(current);
-                        currentRow--;
-                    }
-                }
-                if (event.key.code == sf::Keyboard::Down) {
-                    if (map->getRoom(currentRow, currentCol).getDown()) {
-                        current = map->getTexture((map->getRoom(currentRow + 1, currentCol).getType()) - 1);
-                        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-                            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                                object->getSprite().setColor(sf::Color::Transparent);
-                            }
-                        }
-                        floor.setTexture(current);
-                        currentRow++;
-                    }
-                }
-                if (event.key.code == sf::Keyboard::Enter) {
-                    if (map->getRoom(currentRow, currentCol).getHasStairs()) {
-                        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-                            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                                object->getSprite().setColor(sf::Color::Transparent);
-                            }
-                        }
-                        currentRow = 0;
-                        currentCol = 2;
-                        map->generateMap();
-                        map->terminalPrint();
-                    }
-                }
-                
-            }
+        }
+
+        bulletCooldown = bulletClock.getElapsedTime();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bulletCooldown.asSeconds() >= 0.2f) {
+            bulletClock.restart();
+            andy.shoot();
         }
         
-        window.clear();
-        window.draw(floor);
-        if (!map->getRoom(currentRow, currentCol).getObjects().empty()) {
-            for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
-                window.draw(object->getSprite());
+        andy.update(window, map->getRoom(currentRow, currentCol));   
+
+        sf::Vector2f andyPos = andy.getPosition();
+
+        if (andyPos.x <= 0) {
+            if (map->getRoom(currentRow, currentCol).getLeft()) {
+                currentCol--;
+                andy.setPosition(1680, 400);
+            }
+        } else if (andyPos.x >= 1710) {
+            if (map->getRoom(currentRow, currentCol).getRight()) {
+                currentCol++;
+                andy.setPosition(85, 400);
             }
         }
+        else if (andyPos.y <= 0) {
+            if (map->getRoom(currentRow, currentCol).getUp()) {
+                currentRow--;
+                andy.setPosition(900, 800);
+            }
+        }
+        else if (andyPos.y >= 810) {
+            if (map->getRoom(currentRow, currentCol).getDown()) {
+                currentRow++; 
+                andy.setPosition(900, 0); 
+            }
+        }
+
+        current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
+        floor.setTexture(current);
+
+        window.clear();
+        window.draw(floor);
+        andy.draw(window);
         window.display();
     }
 }

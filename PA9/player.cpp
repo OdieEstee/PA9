@@ -1,8 +1,8 @@
 #include "player.hpp"
 
 Player::Player(float newXPosition, float newYPosition, double newHP) {
-	xVelocity = 3.0; 
-	yVelocity = 3.0; 
+	xVelocity = 4.0; 
+	yVelocity = 4.0; 
 	hp = newHP;
 	sprite.setPosition(newXPosition, newYPosition); 
 }
@@ -35,7 +35,7 @@ void Player::setTextureRight() {
 	sprite.setTexture(texture); 
 }
 
-void Player::movement() {
+void Player::movement(Room room) { 
 
 }
 
@@ -45,6 +45,19 @@ void Player::draw(sf::RenderWindow& window) {
 
 sf::Vector2f Player::getPosition() {
 	return sprite.getPosition();
+}
+
+void Player::setPosition(float x, float y) { 
+	sf::Vector2f newPosition(x, y); 
+	sprite.setPosition(newPosition); 
+}
+
+double Player::getHP() {
+	return hp;
+}
+
+void Player::setHP(double newHP) {
+	hp = newHP; 
 }
 
 Andy::Andy(float newXPosition, float newYPosition, double newHP) : Player(newXPosition, newYPosition, newHP) {    
@@ -62,30 +75,57 @@ std::vector<Bullet>& Andy::getBullets() {
 	return bullets;
 }
 
-void Andy::movement() {
+void Andy::movement(Room room) {
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { 
-		move(1, 0); 
-		setTextureRight(); 
-		directionFacing = sf::Vector2f(1.0f, 0.0f);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		if (getPosition().x <= 1660) {   
+			move(1, 0);
+			setTextureRight();
+			directionFacing = sf::Vector2f(1.0f, 0.0f);
+		} else if (getPosition().y >= 230 && getPosition().y <= 570 && room.getRight()) {
+			move(1, 0); 
+			setTextureRight(); 
+			directionFacing = sf::Vector2f(1.0f, 0.0f);   
+		}
 	}
 	 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { 
-		move(-1, 0); 
-		setTextureLeft();
-		directionFacing = sf::Vector2f(-1.0f, 0.0f);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		if (getPosition().x >= 85) {
+			move(-1, 0);
+			setTextureLeft();
+			directionFacing = sf::Vector2f(-1.0f, 0.0f);
+		}
+		else if (getPosition().y >= 230 && getPosition().y <= 570 && room.getLeft()) { 
+			move(-1, 0);
+			setTextureLeft();
+			directionFacing = sf::Vector2f(-1.0f, 0.0f);
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 
-		move(0, -1); 
-		setTextureUp(); 
-		directionFacing = sf::Vector2f(0.0f, -1.0f);
+		if (getPosition().y >= 0) {  
+			move(0, -1);
+			setTextureUp();
+			directionFacing = sf::Vector2f(0.0f, -1.0f); 
+		}
+		else if (getPosition().x >= 730 && getPosition().x <= 1050 && room.getUp()) {
+			move(0, -1); 
+			setTextureUp();  
+			directionFacing = sf::Vector2f(0.0f, -1.0f);  
+		}
 	}
 	 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { 
-		move(0, 1); 
-		setTextureDown(); 
-		directionFacing = sf::Vector2f(0.0f, 1.0f);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		if (getPosition().y <= 800) {
+			move(0, 1);
+			setTextureDown();
+			directionFacing = sf::Vector2f(0.0f, 1.0f);
+		}
+		else if (getPosition().x >= 730 && getPosition().x <= 1050 && room.getDown()) {
+			move(0, 1); 
+			setTextureDown(); 
+			directionFacing = sf::Vector2f(0.0f, 1.0f);  
+		}
 	}
 }
 
@@ -93,19 +133,24 @@ void Andy::shoot() {
 
 	if (directionFacing.x == 1.0f) {
 		texture.loadFromFile("textures/Andy - Shoot - Right.png");
+		Bullet newBullet(sprite.getPosition().x + 140, sprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50); 
+		bullets.push_back(newBullet); 
 	}
 	else if (directionFacing.x == -1.0f) {
 		texture.loadFromFile("textures/Andy - Shoot - Left.png");
-	}
+		Bullet newBullet(sprite.getPosition().x - 20, sprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50); 
+		bullets.push_back(newBullet);  
+	} 
 	else if (directionFacing.y == -1.0f) {
 		texture.loadFromFile("textures/Andy - Shoot - Up.png");
+		Bullet newBullet(sprite.getPosition().x + 50, sprite.getPosition().y - 20, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
+		bullets.push_back(newBullet); 
 	}
 	else {
 		texture.loadFromFile("textures/Andy - Shoot - Down.png");
+		Bullet newBullet(sprite.getPosition().x + 50, sprite.getPosition().y + 160, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
+		bullets.push_back(newBullet); 
 	}
-
-	Bullet newBullet(sprite.getPosition().x, sprite.getPosition().y, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);     
-	bullets.push_back(newBullet); 
 }
 
 void Andy::removeBullets(sf::RenderWindow& window) {  
@@ -121,8 +166,8 @@ void Andy::removeBullets(sf::RenderWindow& window) {
 	bullets = std::move(inBoundsBullets);
 }
 
-void Andy::update(sf::RenderWindow& window) {
-	movement();
+void Andy::update(sf::RenderWindow& window, Room room) { 
+	movement(room); 
 	removeBullets(window);
 	for (auto& bullet : getBullets()) { 
 		bullet.update(); 

@@ -200,27 +200,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="EnemyProjectiles.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="main2.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="RangedEnemy.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseEnemy.hpp" />
     <ClInclude Include="bullet.hpp" />
+    <ClInclude Include="EnemyProjectiles.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="MeleeEnemy.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="player.hpp" />
+    <ClInclude Include="RangedEnemy.hpp" />
     <ClInclude Include="Room.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
