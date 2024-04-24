@@ -9,19 +9,19 @@ public:
 		enemySprite.setTexture(enemyTexture);
 	}
 	int setHealth() const {
-		return health;
+		return enemyHealth;
 	}
 	int setDamage() const {
-		return damage;
+		return enemyDamage;
 	}
 	sf::Sprite setSprite() const {
 		return enemySprite;
 	}
 	void getHealth(int health) {
-		this->health = health;
+		this->enemyHealth = enemyHealth;
 	}
 	void getDamage(int damage) {
-		this->damage = damage;
+		this->enemyDamage = enemyDamage;
 	}
 	void getSprite(sf::Sprite enemySprite) {
 		this->enemySprite = enemySprite;

@@ -1,33 +1,32 @@
-#ifndef BASEENEMY_HPP
-#define BASEENEMY_HPP
-#include <SFML\Graphics.hpp>
+#pragma once
+
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 
 class BaseEnemy {
 protected:
-	int health;
-	int damage;
 	sf::Sprite enemySprite;
 	sf::Texture enemyTexture;
+	float xVelocity;
+	float yVelocity;
+	double enemyHealth;
+	double enemyDamage;
+	double playerDamageTaken;
 public:
-	int getHealth() const {
-		return health;
-	}
-	int getDamage() const {
-		return damage;
-	}
-	sf::Sprite getSprite() const {
-		return enemySprite;
-	}
-	void setHealth(int health) {
-		this->health = health;
-	}
-	void setDamage(int damage) {
-		this->damage = damage;
-	}
-	void setSprite(sf::Sprite enemySprite) {
-		this->enemySprite = enemySprite;
-	}
+	BaseEnemy(float newXPosition, float newYPosition, double enemyHealth, double enemyDamage);
+	double getEnemyHealth();
+	double getEnemyDamage();
+	sf::Sprite getEnemySprite();
+	sf::Vector2f getEnemyPosition();
+	double getPlayerDamageTaken();
+	void setTextureLeft();
+	void setTextureRight();
+	void setTextureUp();
+	void setTextureDown();
+	void setEnemyHealth(double enemyHealth);
+	void setEnemyDamage(double enemyDamage);
+	virtual void move(int offsetX, int offsetY);
+	virtual void draw(sf::RenderWindow& window);
+	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
 };
-#endif
