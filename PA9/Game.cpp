@@ -257,6 +257,8 @@ void Game::run(sf::RenderWindow& window) {
 
         if (map->getRoom(currentRow, currentCol).getHasStairs() && andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+                currentRow = 0;
+                currentCol = 2;
                 map->generateMap();
                 map->generateObjects();
             }
