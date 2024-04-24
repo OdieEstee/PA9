@@ -2,35 +2,15 @@
 
 class BaseEnemy {
 protected:
-	sf::Sprite sprite;
-	sf::Texture texture;
 	int health;
 	int damage;
+	sf::Sprite enemySprite;
+	sf::Texture enemyTexture;
 public:
-	BaseEnemy(const std::string& textureFile, int health, int damage) {
-		sprite.setTexture(texture);
-		this->health = health;
-		this->damage = damage;
-	}
-	int getHealth() const {
-		return health;
-	}
-	int getDamage() const {
-		return damage;
-	}
-	const sf::Sprite getSprite() const {
-		return sprite;
-	}
-	void setHealth(int health) {
-		this->health = health;
-	}
-	void setDamage(int damage) {
-		this->damage = damage;
-	}
-	virtual void move(float offsetX, float offsetY) {
-		sprite.move(offsetX, offsetY);
-	}
-	virtual void draw(sf::RenderWindow& window) {
-		window.draw(sprite);
-	}
+	int getHealth() const;
+	int getDamage() const;
+	sf::Sprite getSprite() const;
+	void setHealth(int health);
+	void setDamage(int damage);
+	void setSprite(sf::Sprite EnemySprite);
 };

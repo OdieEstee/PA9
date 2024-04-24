@@ -1,30 +1,26 @@
 #include "BaseEnemy.hpp"
 
-class InheritMeleeEnemy : public BaseEnemy {
+class MeleeEnemy : public BaseEnemy {
 public:
-	InheritMeleeEnemy(const std::string& textureFile, int health, int damage) : BaseEnemy(textureFile, health, damage) {}
-	int getHealth() const {
+	BaseEnemy meleeEnemy(sf::Sprite enemySprite, int meleeHealth, int meleeDamage) {
+
+	}
+	int setHealth() const {
 		return health;
 	}
-	int getDamage() const {
+	int setDamage() const {
 		return damage;
 	}
-	const sf::Sprite getSprite() const {
-		return sprite;
+	sf::Sprite setSprite() const {
+		return enemySprite;
 	}
-	int setHealth(int health) {
+	void getHealth(int health) {
 		this->health = health;
 	}
-	int setDamage(int damage) {
+	void getDamage(int damage) {
 		this->damage = damage;
 	}
-	void setSprite(sf::Sprite sprite) {
-		this->sprite = sprite;
-	}
-	virtual void move(float offsetX, float offsetY) {
-		sprite.move(offsetX, offsetY);
-	}
-	virtual void move(sf::RenderWindow& window) {
-		window.draw(sprite);
+	void getSprite(sf::Sprite enemySprite) {
+		this->enemySprite = enemySprite;
 	}
 };
