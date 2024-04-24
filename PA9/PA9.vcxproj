@@ -200,6 +200,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseEnemy.hpp" />
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Map.hpp" />
