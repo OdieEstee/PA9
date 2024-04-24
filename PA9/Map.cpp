@@ -244,9 +244,8 @@ void Map::generateObjects() {
 	vLogTexture->loadFromFile("textures/Object - Log - verticle.png");
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			if ((!floor[i][j].getHasStairs()) && i != 0 && j != 2) {
+			if (!floor[i][j].getHasStairs() && !(i == 0 && j == 2)) {
 				choose = (rand() % 3) + 1;
-				
 				if (choose == 1) {
 					Obstacle* rock = new Obstacle;
 
