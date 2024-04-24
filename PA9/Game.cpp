@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "BaseEnemy.hpp"
 
 void Game::run() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Adventure");
@@ -19,10 +20,13 @@ void Game::run() {
     stairsTexture.loadFromFile("MapTextures/Stairs.png");
     stairs.setTexture(stairsTexture);
 
+
     Andy andy(850, 200, 100);
     vector<Bullet> bullets;
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
+
+    BaseEnemy 
 
     //Game loop
     while (window.isOpen()) {
@@ -39,9 +43,9 @@ void Game::run() {
             bulletClock.restart();
             andy.shoot();
         }
-        
-        andy.update(window, map->getRoom(currentRow, currentCol));   
 
+        andy.update(window, map->getRoom(currentRow, currentCol));   
+        
         sf::Vector2f andyPos = andy.getPosition();
 
         if (andyPos.x <= 0) {
@@ -70,16 +74,16 @@ void Game::run() {
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
-
+        
         window.clear();
         window.draw(floor);
-        
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());
         }
         if (map->getRoom(currentRow, currentCol).getHasStairs()) {
             window.draw(stairs);
         }
+        window.draw(enemySprite);
         andy.draw(window);
         window.display();
     }

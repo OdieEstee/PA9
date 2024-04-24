@@ -43,7 +43,7 @@ void BaseEnemy::setTextureUp() {
 }
 
 void BaseEnemy::setTextureDown() {
-	enemyTexture.loadFromFile("textures/Dog - Idle - Down.png");
+	enemyTexture.loadFromFile("textures/Dog - Idle - Up.png");
 	enemySprite.setTexture(enemyTexture);
 }
 
@@ -65,4 +65,9 @@ void BaseEnemy::draw(sf::RenderWindow& window) {
 
 void BaseEnemy::setNewEnemyHealth(double playerDamageTaken, double enemyHealth) {
 	enemyHealth = enemyHealth - playerDamageTaken;
+}
+
+void BaseEnemy::setEnemyPosition(float x, float y) {
+	sf::Vector2f newPos(x, y);
+	enemySprite.setPosition(newPos);
 }

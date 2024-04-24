@@ -26,7 +26,9 @@ public:
 	void setTextureDown();
 	void setEnemyHealth(double enemyHealth);
 	void setEnemyDamage(double enemyDamage);
+	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
+	void setEnemyPosition(float x, float y);
 	virtual void move(int offsetX, int offsetY);
 	virtual void draw(sf::RenderWindow& window);
-	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
+
 };
