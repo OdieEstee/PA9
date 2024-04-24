@@ -28,7 +28,7 @@ double BaseEnemy::getPlayerDamageTaken() {
 }
 
 void BaseEnemy::setTextureLeft() {
-	enemyTexture.loadFromFile("textures/Dog - Idle - left.png");
+	enemyTexture.loadFromFile("textures/Dog - Idle - Left.png");
 	enemySprite.setTexture(enemyTexture);
 }
 
@@ -43,7 +43,7 @@ void BaseEnemy::setTextureUp() {
 }
 
 void BaseEnemy::setTextureDown() {
-	enemyTexture.loadFromFile("textures/Dog - Idle - Up.png");
+	enemyTexture.loadFromFile("textures/Dog - Idle - Down.png");
 	enemySprite.setTexture(enemyTexture);
 }
 

@@ -205,9 +205,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="RangedEnemy.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +217,11 @@
     <ClInclude Include="bullet.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="MeleeEnemy.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="player.hpp" />
+    <ClInclude Include="RangedEnemy.hpp" />
     <ClInclude Include="Room.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

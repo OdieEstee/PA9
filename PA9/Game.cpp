@@ -26,8 +26,11 @@ void Game::run() {
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
 
-    BaseEnemy 
-
+    BaseEnemy enemy1(400, 400, 100, 20);
+    sf::Sprite enemySprite;
+    sf::Texture enemyTexture;
+   
+    enemySprite.setTexture(enemyTexture);
     //Game loop
     while (window.isOpen()) {
 
