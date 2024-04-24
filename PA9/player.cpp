@@ -76,7 +76,7 @@ void Player::setMaxHP(float newHP) {
 Andy::Andy(float newXPosition, float newYPosition, float newHP) : Player(newXPosition, newYPosition, newHP) {    
 
 	setTextureDown();
-
+	
 	sprite.setPosition(newXPosition, newYPosition);
 	sprite.setTexture(texture);  
 	sprite.setScale(1.5f, 1.5f);

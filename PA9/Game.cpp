@@ -20,6 +20,10 @@ void Game::run() {
     stairs.setTexture(stairsTexture);
 
     Andy andy(850, 200, 20);
+    sf::SoundBuffer hurtBuffer;
+    hurtBuffer.loadFromFile("Audio/AndyHurt.wav");
+    sf::Sound hurt;
+    hurt.setBuffer(hurtBuffer);
     vector<Bullet> bullets;
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
@@ -40,6 +44,7 @@ void Game::run() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bulletCooldown.asSeconds() >= 0.2f) {
             bulletClock.restart();
             andy.shoot();
+            
         }
         
         andy.update(window, map->getRoom(currentRow, currentCol));   
