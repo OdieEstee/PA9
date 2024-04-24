@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector> 
+
 class Bullet {
 
 private: 
@@ -14,7 +15,8 @@ private:
 public:
 
 	Bullet(float startX, float startY, float velocityX, float velocityY, double newDamage);  
-	
+	~Bullet();
+
 	void update();
 	void draw(sf::RenderWindow& window); 
 	bool isOutOfBounds(sf::RenderWindow& window); 

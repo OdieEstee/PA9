@@ -19,10 +19,12 @@ void Game::run() {
     stairsTexture.loadFromFile("MapTextures/Stairs.png");
     stairs.setTexture(stairsTexture);
 
-    Andy andy(850, 200, 100);
+    Andy andy(850, 200, 20);
     vector<Bullet> bullets;
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
+
+    PlayerGUI GUI(&andy); 
 
     //Game loop
     while (window.isOpen()) {
@@ -68,11 +70,20 @@ void Game::run() {
             }
         }
 
+        if (andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+
+            }
+        } 
+
+        
+
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
 
         window.clear();
         window.draw(floor);
+        GUI.render(window); 
         
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());

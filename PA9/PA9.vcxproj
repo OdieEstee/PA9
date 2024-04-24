@@ -207,6 +207,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerGUI.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +217,7 @@
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="player.hpp" />
+    <ClInclude Include="playerGUI.hpp" />
     <ClInclude Include="Room.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
