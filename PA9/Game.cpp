@@ -12,6 +12,12 @@ void Game::run() {
     sf::Texture current;
     int currentRow = 0;
     int currentCol = 2;
+    sf::Sprite stairs;
+    sf::Texture stairsTexture;
+    stairs.setScale(.7, .7);
+    stairs.setPosition(780, 350);
+    stairsTexture.loadFromFile("MapTextures/Stairs.png");
+    stairs.setTexture(stairsTexture);
 
     Andy andy(850, 200, 100);
     vector<Bullet> bullets;
@@ -67,8 +73,12 @@ void Game::run() {
 
         window.clear();
         window.draw(floor);
+        
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());
+        }
+        if (map->getRoom(currentRow, currentCol).getHasStairs()) {
+            window.draw(stairs);
         }
         andy.draw(window);
         window.display();

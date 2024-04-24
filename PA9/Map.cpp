@@ -244,7 +244,7 @@ void Map::generateObjects() {
 	vLogTexture->loadFromFile("textures/Object - Log - verticle.png");
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			if ((rand() % 100) < 101) {
+			if ((!floor[i][j].getHasStairs()) && i != 0 && j != 2) {
 				choose = (rand() % 3) + 1;
 				
 				if (choose == 1) {
@@ -252,7 +252,7 @@ void Map::generateObjects() {
 
 					rock->setTexture(rockTexture);
 					rock->setScale(1, 1);
-					rock->setPos(rand() % 1500 + 200, rand() % 400 + 100);
+					rock->setPos(rand() % 1300 + 200, rand() % 400 + 100);
 					floor[i][j].pushObjects(rock);
 				}
 				if (choose == 2) {
@@ -260,7 +260,7 @@ void Map::generateObjects() {
 
 					hLog->setTexture(hLogTexture);
 					hLog->setScale(3, 3);
-					hLog->setPos(rand() % 1300 + 200, rand() % 400 + 100);
+					hLog->setPos(rand() % 1200 + 200, rand() % 400 + 100);
 					floor[i][j].pushObjects(hLog);
 				}
 				if (choose == 3) {
@@ -268,7 +268,7 @@ void Map::generateObjects() {
 
 					vLog->setTexture(vLogTexture);
 					vLog->setScale(3, 3);
-					vLog->setPos(rand() % 1300 + 200, rand() % 400 + 100);
+					vLog->setPos(rand() % 1200 + 200, rand() % 400 + 100);
 					floor[i][j].pushObjects(vLog);
 				}
 			}
