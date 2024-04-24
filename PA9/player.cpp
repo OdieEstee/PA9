@@ -1,10 +1,15 @@
 #include "player.hpp"
 
-Player::Player(float newXPosition, float newYPosition, double newHP) {
+Player::Player(float newXPosition, float newYPosition, float newHP) {
 	xVelocity = 4.0; 
 	yVelocity = 4.0; 
 	hp = newHP;
-	sprite.setPosition(newXPosition, newYPosition); 
+	maxHP = 100;
+	sprite.setPosition(newXPosition, newYPosition);  
+}
+
+Player::~Player() {
+
 }
 
 sf::Sprite Player::getSprite() {
@@ -52,15 +57,23 @@ void Player::setPosition(float x, float y) {
 	sprite.setPosition(newPosition); 
 }
 
-double Player::getHP() {
+float Player::getHP() {  
 	return hp;
 }
 
-void Player::setHP(double newHP) {
+void Player::setHP(float newHP) {
 	hp = newHP; 
 }
 
-Andy::Andy(float newXPosition, float newYPosition, double newHP) : Player(newXPosition, newYPosition, newHP) {    
+float Player::getMaxHP() {
+	return maxHP;
+}
+
+void Player::setMaxHP(float newHP) {
+	maxHP = newHP; 
+}
+
+Andy::Andy(float newXPosition, float newYPosition, float newHP) : Player(newXPosition, newYPosition, newHP) {    
 
 	setTextureDown();
 
@@ -78,6 +91,7 @@ std::vector<Bullet>& Andy::getBullets() {
 void Andy::movement(Room room) {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+
 		if (getPosition().x <= 1660) {   
 			move(1, 0);
 			setTextureRight();
@@ -103,7 +117,7 @@ void Andy::movement(Room room) {
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 
-		if (getPosition().y >= 0) {  
+		if (getPosition().y >= 10) {  
 			move(0, -1);
 			setTextureUp();
 			directionFacing = sf::Vector2f(0.0f, -1.0f); 

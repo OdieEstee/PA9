@@ -16,6 +16,10 @@ Bullet::Bullet(float startX, float startY, float velocityX, float velocityY, dou
 	bullet.setRotation(angle); */
 }
 
+Bullet::~Bullet() {
+
+}
+
 void Bullet::update() {
 	bullet.move(velocity);
 }

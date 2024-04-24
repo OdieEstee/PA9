@@ -13,11 +13,13 @@ protected:
 	sf::Texture texture; 
 	float xVelocity;  
 	float yVelocity; 
-	double hp;
+	float hp;
+	float maxHP;
 
 public: 
 
-	Player(float newXPosition, float newYPosition, double newHP); 
+	Player(float newXPosition, float newYPosition, float newHP); 
+	~Player(); 
 	sf::Sprite getSprite(); 
 	virtual void move(int xDir, int yDir);  
 	void setTextureUp();
@@ -28,8 +30,10 @@ public:
 	virtual void draw(sf::RenderWindow& window);
 	sf::Vector2f getPosition(); 
 	void setPosition(float x, float y); 
-	double getHP();
-	void setHP(double newHP); 
+	float getHP();
+	void setHP(float newHP); 
+	float getMaxHP();
+	void setMaxHP(float newHP);
 };
 
 class Andy : public Player {
@@ -40,7 +44,7 @@ private:
 
 public:
 
-	Andy(float newXPosition, float newYPosition, double newHP);  
+	Andy(float newXPosition, float newYPosition, float newHP);   
 	void movement(Room room) override;   
 	std::vector<Bullet>& getBullets(); 
 	void shoot();   
