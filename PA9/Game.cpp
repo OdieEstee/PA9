@@ -280,7 +280,7 @@ void Game::run(sf::RenderWindow& window) {
         }*/
 
         enemy1.moveTowardsPlayer(andy);
-        enemy2.moveTowardsPlayer(andy);
+        enemy2.moveTowardsPlayer(andy, window); 
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
