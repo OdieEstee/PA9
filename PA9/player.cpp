@@ -73,6 +73,10 @@ void Player::setMaxHP(float newHP) {
 	maxHP = newHP; 
 }
 
+void Player::takeDamage(float damage) {
+	this->setHP(hp - damage);
+}
+
 Andy::Andy(float newXPosition, float newYPosition, float newHP) : Player(newXPosition, newYPosition, newHP) {    
 
 	setTextureDown();
@@ -190,8 +194,11 @@ void Andy::update(sf::RenderWindow& window, Room room) {
 
 void Andy::draw(sf::RenderWindow& window) {
 
-	window.draw(sprite);
-	for (auto& bullet : bullets) {
+	if (hp > 0) {
+		window.draw(sprite);
+	}
+
+	for (auto& bullet : bullets) { 
 		bullet.draw(window);
 	}
 }

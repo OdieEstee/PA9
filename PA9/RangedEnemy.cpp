@@ -56,13 +56,22 @@ void RangedEnemy::setEnemyHealth(double enemyHealth) {
 void RangedEnemy::setEnemyRangedDamage(double enemyDamage) {
 	this->enemyDamage = enemyDamage;
 }
+ 
+std::vector<Fireball>& RangedEnemy::getFireball() {  
+	return fireballs; 
+}
 
 void RangedEnemy::move(int offsetX, int offsetY) {
 	enemySprite.move(offsetX * xVelocity, offsetY * yVelocity);
 }
 
 void RangedEnemy::draw(sf::RenderWindow& window) {
+
 	window.draw(enemySprite);
+
+	for (auto& fireball : fireballs) {   
+		fireball.draw(window); 
+	}
 }
 
 void RangedEnemy::setNewEnemyHealth(double playerDamageTaken, double enemyHealth) {
@@ -84,15 +93,22 @@ void RangedEnemy::moveTowardsPlayer(Andy& andy, sf::RenderWindow& window) {
 		float vx = xVelocity * dx / distance;
 		float vy = yVelocity * dy / distance;
 		enemySprite.move(vx, vy);
+		directionFacing = sf::Vector2f(vx, vy);
 	}
-	shoot();
-	removeFireballs(window); 
+}
+
+void RangedEnemy::update(Andy& andy, sf::RenderWindow& window) {
+
+	moveTowardsPlayer(andy, window);  
+
+	removeFireballs(window, andy);  
+
 }
 
 void RangedEnemy::shoot() {
 	if (directionFacing.x == 1.0f) {
 		enemyTexture.loadFromFile("textures/Wizard - Shoot - Right.png");
-		Fireball newFireball(enemySprite.getPosition().x - 20, enemySprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50); 
+		Fireball newFireball(enemySprite.getPosition().x - 20, enemySprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);  
 		fireballs.push_back(newFireball);
 	}
 	else if (directionFacing.x == -1.0f) {
@@ -107,13 +123,21 @@ void RangedEnemy::shoot() {
 	}
 	else {
 		enemyTexture.loadFromFile("textures/Wizard - Shoot - Down.png");
-		Fireball newFireball(enemySprite.getPosition().x + 50, enemySprite.getPosition().y - 20, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
+		Fireball newFireball(enemySprite.getPosition().x + 50, enemySprite.getPosition().y - 20, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50); 
 		fireballs.push_back(newFireball);
 	}
 }
 
-void RangedEnemy::removeFireballs(sf::RenderWindow& window) {
+void RangedEnemy::removeFireballs(sf::RenderWindow& window, Andy& andy) { 
 	std::vector<Fireball> inBoundsFireballs;
+
+	for (auto& fireball : fireballs) { 
+		fireball.update();
+		if (fireball.getFireball().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds())) {
+			andy.takeDamage(0.01f); 
+			inBoundsFireballs.push_back(fireball);  
+		}
+	}
 
 	for (auto& fireball : fireballs) {
 		if (!fireball.isOutOfBounds(window)) {

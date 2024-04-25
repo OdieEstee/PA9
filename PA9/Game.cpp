@@ -193,7 +193,7 @@ void Game::run(sf::RenderWindow& window) {
     stairsTexture.loadFromFile("textures/Stairs.png");
     stairs.setTexture(stairsTexture);
     
-    Andy andy(850, 200, 20);
+    Andy andy(850, 200, 100); 
     sf::SoundBuffer hurtBuffer;
     hurtBuffer.loadFromFile("Audio/AndyHurt.wav");
     sf::Sound hurt;
@@ -213,12 +213,16 @@ void Game::run(sf::RenderWindow& window) {
     loadingTexture.loadFromFile("textures/Loading.png");
     loading.setTexture(loadingTexture);
 
-    PlayerGUI GUI(&andy); 
-
     MeleeEnemy enemy1(300, 300, 100, 20);
     enemy1.setTextureDown();
     RangedEnemy enemy2(800, 800, 100, 20);
     enemy2.setTextureDown(); 
+
+    vector<Fireball> fireballs;
+    sf::Clock fireballClock; 
+    sf::Time fireballCooldown;
+
+    PlayerGUI GUI(&andy); 
 
     //Game loop
     while (window.isOpen()) {
@@ -283,19 +287,35 @@ void Game::run(sf::RenderWindow& window) {
             }
         } 
 
-      /*  if (!enemy1.getEnemySprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds())) {
-            enemy1.moveTowardsPlayer(andy);
-        }*/
+       fireballCooldown = fireballClock.getElapsedTime();
+
+       if (fireballCooldown.asSeconds() >= 0.5f) {
+           fireballClock.restart();
+           enemy2.shoot(); 
+       }
+
+       for (auto& bullet : andy.getBullets()) {
+           if (bullet.getBullet().getGlobalBounds().intersects(enemy1.getEnemySprite().getGlobalBounds())) {
+               enemy1.setEnemyHealth(enemy1.getEnemyHealth() - 8.33f);  
+           }
+
+           if (bullet.getBullet().getGlobalBounds().intersects(enemy2.getEnemySprite().getGlobalBounds())) { 
+               enemy2.setEnemyHealth(enemy2.getEnemyHealth() - 8.33f); 
+           }
+       }
 
         enemy1.moveTowardsPlayer(andy);
-        enemy2.moveTowardsPlayer(andy, window); 
+        enemy2.update(andy, window); 
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
 
         window.clear();
-        window.draw(floor);
-        GUI.render(window); 
+        window.draw(floor); 
+
+        if (andy.getHP() > 0) {
+            GUI.render(window); 
+        }
         
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());
@@ -304,8 +324,12 @@ void Game::run(sf::RenderWindow& window) {
             window.draw(stairs);
         }
         andy.draw(window);
-        enemy1.draw(window); 
-        enemy2.draw(window); 
+        if (enemy1.getEnemyHealth() > 0) {
+            enemy1.draw(window);
+        }
+        if (enemy2.getEnemyHealth() > 0) {
+            enemy2.draw(window); 
+        }
         window.display();
     }
 }

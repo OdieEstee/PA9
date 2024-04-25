@@ -8,7 +8,7 @@ Fireball::Fireball(float startX, float startY, float velocityX, float velocityY,
 
 	fireballTexture = new sf::Texture; 
 	fireballTexture->loadFromFile("textures/Wizard - Fireball - Right.png");
-	fireballSprite.setTexture(*fireballTexture); 
+	fireballSprite.setTexture(*fireballTexture);  
 	fireballSprite.setScale(0.5f, 0.5f);
 }
 

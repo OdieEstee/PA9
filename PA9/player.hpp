@@ -35,14 +35,14 @@ public:
 	void setHP(float newHP); 
 	float getMaxHP();
 	void setMaxHP(float newHP);
+	void takeDamage(float damage);
 };
 
 class Andy : public Player {
 
 private:
 	std::vector<Bullet> bullets;
-	sf::Vector2f directionFacing; 
-
+	sf::Vector2f directionFacing;  
 
 public:
 
