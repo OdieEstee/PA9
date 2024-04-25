@@ -292,6 +292,14 @@ void Map::generateObjects() {
 					crate->setPos(rand() % 1300 + 200, rand() % 400 + 200);
 					floor[i][j].pushObjects(crate);
 				}
+				if (choose == 2) {
+					Obstacle* crate = new Obstacle;
+
+					crate->setTexture(crateTexture);
+					crate->setScale(1, 1);
+					crate->setPos(rand() % 1300 + 200, rand() % 400 + 200);
+					floor[i][j].pushObjects(crate);
+				}
 			}
 		}
 	}

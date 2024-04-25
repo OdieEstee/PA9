@@ -208,6 +208,11 @@ void Game::run(sf::RenderWindow& window) {
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
 
+    sf::Sprite loading;
+    sf::Texture loadingTexture;
+    loadingTexture.loadFromFile("textures/Loading.png");
+    loading.setTexture(loadingTexture);
+
     PlayerGUI GUI(&andy); 
 
     MeleeEnemy enemy1(300, 300, 100, 20);
@@ -268,12 +273,15 @@ void Game::run(sf::RenderWindow& window) {
             }
         }
 
-        if (map->getRoom(currentRow, currentCol).getHasStairs() && andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
+        if (map->getRoom(currentRow, currentCol).getHasStairs()) {
+            if(andy.getSprite().getGlobalBounds().intersects(stairs.getGlobalBounds())) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                 currentRow = 0;
                 currentCol = 2;
+
                 map->generateMap();
                 map->generateObjects();
+            }
             }
         } 
 
@@ -282,7 +290,7 @@ void Game::run(sf::RenderWindow& window) {
         }*/
 
         enemy1.moveTowardsPlayer(andy);
-        enemy2.moveTowardsPlayer(andy);
+        enemy2.moveTowardsPlayer(andy, window); 
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);

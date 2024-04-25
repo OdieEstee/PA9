@@ -30,17 +30,17 @@ sf::Vector2f RangedEnemy::getEnemyPosition() {
 }
 
 void RangedEnemy::setTextureLeft() {
-	enemyTexture.loadFromFile("textures/Wizard - Idle - Left.png");
+	enemyTexture.loadFromFile("textures/Wizard - Walking1 - Left.png");
 	enemySprite.setTexture(enemyTexture);
 }
 
 void RangedEnemy::setTextureRight() {
-	enemyTexture.loadFromFile("textures/Wizard - Idle - Right.png");
+	enemyTexture.loadFromFile("textures/Wizard - Walking1 - Right.png");
 	enemySprite.setTexture(enemyTexture);
 }
 
 void RangedEnemy::setTextureUp() {
-	enemyTexture.loadFromFile("textures/Wizard - Idle - Up.png");
+	enemyTexture.loadFromFile("textures/Wizard - Walking1 - Up.png");
 	enemySprite.setTexture(enemyTexture);
 }
 
@@ -74,7 +74,7 @@ void RangedEnemy::setEnemyPosition(float x, float y) {
 	enemySprite.setPosition(newPos);
 }
 
-void RangedEnemy::moveTowardsPlayer(Andy& andy) {
+void RangedEnemy::moveTowardsPlayer(Andy& andy, sf::RenderWindow& window) {
 	sf::Vector2f playerPos = andy.getPosition();
 	float dx = playerPos.x - enemySprite.getPosition().x;
 	float dy = playerPos.y - enemySprite.getPosition().y;
@@ -85,26 +85,28 @@ void RangedEnemy::moveTowardsPlayer(Andy& andy) {
 		float vy = yVelocity * dy / distance;
 		enemySprite.move(vx, vy);
 	}
+	shoot();
+	removeFireballs(window); 
 }
 
 void RangedEnemy::shoot() {
 	if (directionFacing.x == 1.0f) {
-		enemyTexture.loadFromFile("textures/Wizard - Fireball - Right.png");
+		enemyTexture.loadFromFile("textures/Wizard - Shoot - Right.png");
 		Fireball newFireball(enemySprite.getPosition().x - 20, enemySprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50); 
 		fireballs.push_back(newFireball);
 	}
 	else if (directionFacing.x == -1.0f) {
-		enemyTexture.loadFromFile("textures/Wizard - Fireball - Left.png");
+		enemyTexture.loadFromFile("textures/Wizard - Shoot - Left.png");
 		Fireball newFireball(enemySprite.getPosition().x - 20, enemySprite.getPosition().y + 60, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
 		fireballs.push_back(newFireball);
 	}
 	else if (directionFacing.y == -1.0f) {
-		enemyTexture.loadFromFile("textures/Wizard - Fireball - Up.png");
+		enemyTexture.loadFromFile("textures/Wizard - Shoot - Up.png");
 		Fireball newFireball(enemySprite.getPosition().x + 50, enemySprite.getPosition().y - 20, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
 		fireballs.push_back(newFireball);
 	}
 	else {
-		enemyTexture.loadFromFile("textures/Wizard - Fireball - Down.png");
+		enemyTexture.loadFromFile("textures/Wizard - Shoot - Down.png");
 		Fireball newFireball(enemySprite.getPosition().x + 50, enemySprite.getPosition().y - 20, directionFacing.x * 25.0f, directionFacing.y * 25.0f, 50);
 		fireballs.push_back(newFireball);
 	}
