@@ -15,3 +15,13 @@ void Object::setScale(float x, float y) {
 void Object::setPos(int x, int y) {
 	sprite.setPosition(x, y);
 }
+
+void Object::setName(sf::String newName)
+{
+	name = newName;
+}
+
+sf::String Object::getName()
+{
+	return name;
+}

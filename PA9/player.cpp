@@ -1,8 +1,8 @@
 #include "player.hpp"
 
 Player::Player(float newXPosition, float newYPosition, float newHP) {
-	xVelocity = 4.0; 
-	yVelocity = 4.0; 
+	xVelocity = 12.0; 
+	yVelocity = 12.0; 
 	hp = newHP;
 	maxHP = 100;
 	sprite.setPosition(newXPosition, newYPosition);  
