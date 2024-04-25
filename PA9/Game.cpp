@@ -197,7 +197,7 @@ void Game::run(sf::RenderWindow& window) {
     stairsTexture.loadFromFile("textures/Stairs.png");
     stairs.setTexture(stairsTexture);
     
-    Andy andy(850, 200, 20);
+    Andy andy(850, 200, 100);
     sf::SoundBuffer hurtBuffer;
     hurtBuffer.loadFromFile("Audio/AndyHurt.wav");
     sf::Sound hurt;
@@ -224,7 +224,8 @@ void Game::run(sf::RenderWindow& window) {
 
     PlayerGUI GUI(&andy); 
 
-    
+    sf::Clock fireballClock;
+    sf::Time fireballCooldown;
 
     //Game loop
     while (window.isOpen()) {
@@ -291,9 +292,7 @@ void Game::run(sf::RenderWindow& window) {
             }
         } 
 
-      /*  if (!enemy1.getEnemySprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds())) {
-            enemy1.moveTowardsPlayer(andy);
-        }*/
+        fireballCooldown = fireballClock.getElapsedTime();
 
        if (fireballCooldown.asSeconds() >= 0.5f) {
            fireballClock.restart();
@@ -301,7 +300,6 @@ void Game::run(sf::RenderWindow& window) {
        }
 
        for (auto& bullet : andy.getBullets()) {
-           
 
            if (bullet.getBullet().getGlobalBounds().intersects(enemy2.getEnemySprite().getGlobalBounds())) { 
                enemy2.setEnemyHealth(enemy2.getEnemyHealth() - 8.33f); 
