@@ -8,7 +8,7 @@ Sebastian Phillips - Lab Section 6
 Demo video: 
 
 Who did what:
-Map and Objects - Christian
+Randomly procedurally generated Map and Objects - Christian
 Player, Player shooting, and Enemies - Ken
 All custom visuals, Main Menu, Pause screen, and Object collision physics - Seb
 Helped with Enemies - Jacob
