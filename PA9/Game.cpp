@@ -23,7 +23,10 @@ void Game::main_menu()
     help.setScale(1.5, 1.5);
     quit.setScale(1.5, 1.5);
 
-
+    sf::Sprite gameOver;
+    sf::Texture gameOverTexture;
+    gameOverTexture.loadFromFile("textures/GameOver.png");
+    gameOver.setTexture(gameOverTexture);
 
     sf::Sprite background;
     sf::Texture backgroundText;
@@ -48,6 +51,7 @@ void Game::main_menu()
                     if (play.getGlobalBounds().contains(mousePos))
                     {
                         run(window);
+                        
                     }
                     else if (help.getGlobalBounds().contains(mousePos))
                     {
@@ -213,8 +217,6 @@ void Game::run(sf::RenderWindow& window) {
     loadingTexture.loadFromFile("textures/Loading.png");
     loading.setTexture(loadingTexture);
 
-    MeleeEnemy enemy1(300, 300, 100, 20);
-    enemy1.setTextureDown();
     RangedEnemy enemy2(800, 800, 100, 20);
     enemy2.setTextureDown(); 
 
@@ -223,6 +225,8 @@ void Game::run(sf::RenderWindow& window) {
     sf::Time fireballCooldown;
 
     PlayerGUI GUI(&andy); 
+
+    
 
     //Game loop
     while (window.isOpen()) {
@@ -295,17 +299,15 @@ void Game::run(sf::RenderWindow& window) {
        }
 
        for (auto& bullet : andy.getBullets()) {
-           if (bullet.getBullet().getGlobalBounds().intersects(enemy1.getEnemySprite().getGlobalBounds())) {
-               enemy1.setEnemyHealth(enemy1.getEnemyHealth() - 8.33f);  
-           }
+           
 
            if (bullet.getBullet().getGlobalBounds().intersects(enemy2.getEnemySprite().getGlobalBounds())) { 
                enemy2.setEnemyHealth(enemy2.getEnemyHealth() - 8.33f); 
            }
        }
 
-        enemy1.moveTowardsPlayer(andy);
-        enemy2.update(andy, window); 
+       
+        
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
@@ -316,6 +318,9 @@ void Game::run(sf::RenderWindow& window) {
         if (andy.getHP() > 0) {
             GUI.render(window); 
         }
+        if (andy.getHP() < 0) {
+            break;
+        }
         
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());
@@ -324,10 +329,9 @@ void Game::run(sf::RenderWindow& window) {
             window.draw(stairs);
         }
         andy.draw(window);
-        if (enemy1.getEnemyHealth() > 0) {
-            enemy1.draw(window);
-        }
+        
         if (enemy2.getEnemyHealth() > 0) {
+            enemy2.update(andy, window);
             enemy2.draw(window); 
         }
         window.display();
