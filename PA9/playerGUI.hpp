@@ -3,7 +3,7 @@
 class PlayerGUI {
 
 private:
-	Andy* andy;
+	Andy* andy;  
 
 	sf::Font font;
 	sf::RectangleShape hpBarBack;

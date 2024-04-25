@@ -20,11 +20,13 @@ public:
 	void setTextureDown();
 	void setEnemyHealth(double enemyHealth);
 	void setEnemyRangedDamage(double enemyDamage);
+	void update(Andy& andy, sf::RenderWindow& window);
+	std::vector<Fireball>& getFireball(); 
 	void move(int offsetX, int offsetY)override;
 	void draw(sf::RenderWindow& window)override;
 	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
 	void setEnemyPosition(float x, float y);
 	void moveTowardsPlayer(Andy& andy, sf::RenderWindow& window);
-	void shoot();
-	void removeFireballs(sf::RenderWindow& window);
+	void shoot(); 
+	void removeFireballs(sf::RenderWindow& window, Andy& andy); 
 };

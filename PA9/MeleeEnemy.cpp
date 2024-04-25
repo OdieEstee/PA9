@@ -86,6 +86,7 @@ void MeleeEnemy::moveTowardsPlayer(Andy& andy) {
 	float vy = yVelocity * dy / distance;
 	if (distance > 0) {
 		enemySprite.move(vx, vy);
+
 	}
 	
 }
