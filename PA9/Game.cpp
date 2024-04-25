@@ -70,7 +70,7 @@ void Game::main_menu()
 
 }
 
-void Game::helpScreen(sf::RenderWindow& window)
+bool Game::helpScreen(sf::RenderWindow& window)
 {
     sf::Sprite help, back;
     sf::Texture helpText, backText;
@@ -98,7 +98,7 @@ void Game::helpScreen(sf::RenderWindow& window)
                     sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                     if (back.getGlobalBounds().contains(mousePos))
                     {
-                        return;
+                        return true;
                     }
                 }
             }
@@ -188,9 +188,9 @@ void Game::run(sf::RenderWindow& window) {
     int currentCol = 2;
     sf::Sprite stairs;
     sf::Texture stairsTexture;
-    stairs.setScale(.7, .7);
+    stairs.setScale(2, 2);
     stairs.setPosition(780, 350);
-    stairsTexture.loadFromFile("MapTextures/Stairs.png");
+    stairsTexture.loadFromFile("textures/Stairs.png");
     stairs.setTexture(stairsTexture);
 
     Andy andy(850, 200, 20);

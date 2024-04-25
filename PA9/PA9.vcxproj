@@ -209,6 +209,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerGUI.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.hpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="player.hpp" />
     <ClInclude Include="playerGUI.hpp" />
     <ClInclude Include="Room.hpp" />
+    <ClInclude Include="Test.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
