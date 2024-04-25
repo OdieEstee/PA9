@@ -24,7 +24,7 @@ public:
 	void draw(sf::RenderWindow& window)override;
 	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
 	void setEnemyPosition(float x, float y);
-	void moveTowardsPlayer(Andy& andy, sf::RenderWindow& window);
+	sf::Vector2f moveTowardsPlayer(Andy& andy, sf::RenderWindow& window);
 	void shoot();
 	void removeFireballs(sf::RenderWindow& window);
 };

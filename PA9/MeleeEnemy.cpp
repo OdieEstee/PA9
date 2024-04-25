@@ -76,15 +76,16 @@ void MeleeEnemy::setEnemyPosition(float x, float y) {
 	enemySprite.setPosition(newPos);
 }
 
-void MeleeEnemy::moveTowardsPlayer(Andy& andy) {
+sf::Vector2f MeleeEnemy::moveTowardsPlayer(Andy& andy) {
 	sf::Vector2f playerPos = andy.getPosition();
 	float dx = playerPos.x - enemySprite.getPosition().x;
 	float dy = playerPos.y - enemySprite.getPosition().y;
 	float angle = atan2(dy, dx);
 	float distance = sqrt(dx * dx + dy * dy);
+	float vx = xVelocity * dx / distance;
+	float vy = yVelocity * dy / distance;
 	if (distance > 0) {
-		float vx = xVelocity * dx / distance;
-		float vy = yVelocity * dy / distance;
 		enemySprite.move(vx, vy);
 	}
+	return sf::Vector2f(vx, vy);
 }
