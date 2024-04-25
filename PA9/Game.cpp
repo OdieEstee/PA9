@@ -215,6 +215,8 @@ void Game::run(sf::RenderWindow& window) {
     RangedEnemy enemy2(800, 800, 100, 20);
     enemy2.setTextureDown(); 
 
+    bool canTeleport = true;
+
     //Game loop
     while (window.isOpen()) {
 
@@ -288,13 +290,51 @@ void Game::run(sf::RenderWindow& window) {
         window.clear();
         window.draw(floor);
         GUI.render(window); 
-        
+       
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
             window.draw(object->getSprite());
+            if (object->getName() == "Portal")
+            {
+                if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && canTeleport == true)
+                {
+                    if (object == map->getRoom(currentRow, currentCol).getObjects()[0] && canTeleport == true)
+                    {
+                 
+                        andy.setPosition(map->getRoom(currentRow, currentCol).getObjects()[1]->getSprite().getPosition().x, map->getRoom(currentRow, currentCol).getObjects()[1]->getSprite().getPosition().y);
+                    }
+                
+                    canTeleport = false;
+                
+                }
+                
+            }
         }
         if (map->getRoom(currentRow, currentCol).getHasStairs()) {
             window.draw(stairs);
         }
+        for (Object* object : map->getRoom(currentRow, currentCol).getObjects())
+        {
+            if (object->getName() == "Portal")
+            {
+
+                if (!object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && canTeleport == false)
+                {
+                    canTeleport = true;
+                 
+                }
+                if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && canTeleport == true)
+                {
+                    canTeleport = false;
+               
+                }
+
+               
+            }
+        }
+
+      
+        
+
         andy.draw(window);
         enemy1.draw(window); 
         enemy2.draw(window); 
