@@ -252,7 +252,6 @@ void Map::generateObjects() {
 		for (int j = 0; j < 5; j++) {
 			if (!floor[i][j].getHasStairs() && !(i == 0 && j == 2)) {
 				choose = (rand() % 3) + 1;
-				cout << choose << endl;
 				if (choose == 1) {
 					Obstacle* rock = new Obstacle;
 

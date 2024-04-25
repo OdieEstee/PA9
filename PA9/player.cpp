@@ -40,8 +40,8 @@ void Player::setTextureRight() {
 	sprite.setTexture(texture); 
 }
 
-void Player::movement(Room room) { 
-
+sf::Vector2f Player::movement(Room room) { 
+	return sf::Vector2f(0, 0);
 }
 
 void Player::draw(sf::RenderWindow& window) {
@@ -92,8 +92,8 @@ std::vector<Bullet>& Andy::getBullets() {
 	return bullets;
 }
 
-void Andy::movement(Room room) {
-
+sf::Vector2f Andy::movement(Room room) {
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 
 		if (getPosition().x <= 1660) {   
@@ -145,6 +145,8 @@ void Andy::movement(Room room) {
 			directionFacing = sf::Vector2f(0.0f, 1.0f);  
 		}
 	}
+
+	return directionFacing;
 }
 
 void Andy::shoot() {
@@ -184,12 +186,14 @@ void Andy::removeBullets(sf::RenderWindow& window) {
 	bullets = std::move(inBoundsBullets);
 }
 
-void Andy::update(sf::RenderWindow& window, Room room) { 
-	movement(room); 
+sf::Vector2f Andy::update(sf::RenderWindow& window, Room room) { 
+
+	sf::Vector2f direction = movement(room); 
 	removeBullets(window);
 	for (auto& bullet : getBullets()) { 
 		bullet.update(); 
 	}
+	return direction;
 }
 
 void Andy::draw(sf::RenderWindow& window) {

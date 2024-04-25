@@ -249,9 +249,9 @@ void Game::run(sf::RenderWindow& window) {
 
         }
         
-        andy.update(window, map->getRoom(currentRow, currentCol));   
+        sf::Vector2f direction = andy.update(window, map->getRoom(currentRow, currentCol));   
 
-        andy.move()
+       
 
         sf::Vector2f andyPos = andy.getPosition();
 
@@ -311,6 +311,8 @@ void Game::run(sf::RenderWindow& window) {
        
         
 
+
+
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
 
@@ -340,6 +342,29 @@ void Game::run(sf::RenderWindow& window) {
                 }
                 
             }
+            else
+            {
+        if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && direction.x > 0)
+        {
+            andy.setPosition(andy.getPosition().x - 12, andy.getPosition().y);
+        }
+        else if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && direction.x < 0)
+        {
+            andy.setPosition(andy.getPosition().x + 12, andy.getPosition().y);
+        }
+        else if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && direction.y > 0)
+        {
+            andy.setPosition(andy.getPosition().x, andy.getPosition().y - 12);
+        }
+        else if (object->getSprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds()) && direction.y < 0)
+        {
+            andy.setPosition(andy.getPosition().x, andy.getPosition().y + 12);
+        }
+
+            }
+
+            
+            
         }
         if (map->getRoom(currentRow, currentCol).getHasStairs()) {
             window.draw(stairs);
