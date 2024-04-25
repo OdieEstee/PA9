@@ -43,6 +43,7 @@ private:
 	std::vector<Bullet> bullets;
 	sf::Vector2f directionFacing; 
 
+
 public:
 
 	Andy(float newXPosition, float newYPosition, float newHP);   

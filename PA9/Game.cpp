@@ -192,12 +192,18 @@ void Game::run(sf::RenderWindow& window) {
     stairs.setPosition(780, 350);
     stairsTexture.loadFromFile("MapTextures/Stairs.png");
     stairs.setTexture(stairsTexture);
-
+    
     Andy andy(850, 200, 20);
     sf::SoundBuffer hurtBuffer;
     hurtBuffer.loadFromFile("Audio/AndyHurt.wav");
     sf::Sound hurt;
     hurt.setBuffer(hurtBuffer);
+
+    sf::SoundBuffer laserBuffer;
+    laserBuffer.loadFromFile("Audio/Laser.wav");
+    sf::Sound laser;
+    laser.setBuffer(laserBuffer);
+    laser.setPitch(.5);
     vector<Bullet> bullets;
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
@@ -218,7 +224,7 @@ void Game::run(sf::RenderWindow& window) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bulletCooldown.asSeconds() >= 0.2f) {
             bulletClock.restart();
             andy.shoot();
-            
+            laser.play();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
