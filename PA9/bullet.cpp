@@ -1,6 +1,6 @@
 #include "bullet.hpp"
 
-Bullet::Bullet(float startX, float startY, float velocityX, float velocityY, double newDamage) {
+Bullet::Bullet(float startX, float startY, float velocityX, float velocityY, float newDamage) {
 
 	bullet.setPosition(startX, startY);  
 	velocity.x = velocityX;
@@ -38,11 +38,11 @@ sf::Sprite Bullet::getBullet() {
 	return bullet;
 }
 
-double Bullet::getDamage() {
+float Bullet::getDamage() {
 	return damage;
 }
 
-void Bullet::setDamage(double newDamage) {
+void Bullet::setDamage(float newDamage) {
 	damage = newDamage;
 }
 
