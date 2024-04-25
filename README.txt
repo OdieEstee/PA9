@@ -5,10 +5,10 @@ Jacob Boots - Lab Section 3
 Kenneth Son - Lab Section 6
 Sebastian Phillips - Lab Section 6
 
-Demo video: 
+Demo video: https://outplayed.tv/media/5KEKOL
 
 Who did what:
 Randomly procedurally generated Map and Objects - Christian
 Player, Player shooting, and Enemies - Ken
-All custom visuals, Main Menu, Pause screen, and Object collision physics - Seb
+All custom visuals, Main Menu, Pause screen, and Object collision and teleportation physics - Seb
 Helped with Enemies - Jacob
