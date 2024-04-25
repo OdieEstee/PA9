@@ -9,6 +9,6 @@ Demo video:
 
 Who did what:
 Map and Objects - Christian
-Player and Player shooting and Enemies - Ken
-Textures and Main Menu and Pause screen and Object collisons - Seb
+Player, Player shooting, and Enemies - Ken
+All custom visuals, Main Menu, Pause screen, Object collison physics - Seb
 Helped with Enemies - Jacob
