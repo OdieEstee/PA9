@@ -74,7 +74,7 @@ void RangedEnemy::setEnemyPosition(float x, float y) {
 	enemySprite.setPosition(newPos);
 }
 
-sf::Vector2f RangedEnemy::moveTowardsPlayer(Andy& andy, sf::RenderWindow& window) {
+void RangedEnemy::moveTowardsPlayer(Andy& andy, sf::RenderWindow& window) {
 	sf::Vector2f playerPos = andy.getPosition();
 	float dx = playerPos.x - enemySprite.getPosition().x;
 	float dy = playerPos.y - enemySprite.getPosition().y;
@@ -88,7 +88,7 @@ sf::Vector2f RangedEnemy::moveTowardsPlayer(Andy& andy, sf::RenderWindow& window
 	shoot();
 	removeFireballs(window); 
 
-	return sf::Vector2f(vx, vy);
+	
 }
 
 void RangedEnemy::shoot() {

@@ -291,8 +291,8 @@ void Game::run(sf::RenderWindow& window) {
             enemy1.moveTowardsPlayer(andy);
         }*/
 
-        sf::Vector2f enemy1Dir = enemy1.moveTowardsPlayer(andy);
-        sf::Vector2f enemy2Dir = enemy2.moveTowardsPlayer(andy, window); 
+        enemy1.moveTowardsPlayer(andy);
+        enemy2.moveTowardsPlayer(andy, window); 
 
 
 

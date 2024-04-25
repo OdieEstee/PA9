@@ -20,5 +20,5 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	void setNewEnemyHealth(double playerDamageTaken, double enemyHealth);
 	void setEnemyPosition(float x, float y);
-	sf::Vector2f moveTowardsPlayer(Andy& andy);
+	void moveTowardsPlayer(Andy& andy);
 };
