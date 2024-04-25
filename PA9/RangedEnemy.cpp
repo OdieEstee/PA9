@@ -134,7 +134,7 @@ void RangedEnemy::removeFireballs(sf::RenderWindow& window, Andy& andy) {
 	for (auto& fireball : fireballs) { 
 		fireball.update();
 		if (fireball.getFireball().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds())) {
-			andy.takeDamage(0.01f); 
+			andy.takeDamage(0.008f); 
 			inBoundsFireballs.push_back(fireball);  
 		}
 	}
