@@ -215,6 +215,11 @@ void Game::run(sf::RenderWindow& window) {
 
     PlayerGUI GUI(&andy); 
 
+    MeleeEnemy enemy1(300, 300, 100, 20);
+    enemy1.setTextureDown();
+    RangedEnemy enemy2(800, 800, 100, 20);
+    enemy2.setTextureDown(); 
+
     //Game loop
     while (window.isOpen()) {
 
@@ -278,7 +283,12 @@ void Game::run(sf::RenderWindow& window) {
             }
         } 
 
-        
+      /*  if (!enemy1.getEnemySprite().getGlobalBounds().intersects(andy.getSprite().getGlobalBounds())) {
+            enemy1.moveTowardsPlayer(andy);
+        }*/
+
+        enemy1.moveTowardsPlayer(andy);
+        enemy2.moveTowardsPlayer(andy);
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
@@ -294,6 +304,8 @@ void Game::run(sf::RenderWindow& window) {
             window.draw(stairs);
         }
         andy.draw(window);
+        enemy1.draw(window); 
+        enemy2.draw(window); 
         window.display();
     }
 }

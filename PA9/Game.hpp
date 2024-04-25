@@ -1,6 +1,8 @@
 #include "player.hpp"
 #include "bullet.hpp"
 #include "playerGUI.hpp"
+#include "MeleeEnemy.hpp"
+#include "RangedEnemy.hpp" 
 
 class Game {
 public:
