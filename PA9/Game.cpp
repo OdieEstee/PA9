@@ -247,6 +247,8 @@ void Game::run(sf::RenderWindow& window) {
         
         andy.update(window, map->getRoom(currentRow, currentCol));   
 
+        andy.move()
+
         sf::Vector2f andyPos = andy.getPosition();
 
         if (andyPos.x <= 0) {
@@ -307,7 +309,6 @@ void Game::run(sf::RenderWindow& window) {
                 {
                     if (object == map->getRoom(currentRow, currentCol).getObjects()[0] && canTeleport == true)
                     {
-                 
                         andy.setPosition(map->getRoom(currentRow, currentCol).getObjects()[1]->getSprite().getPosition().x, map->getRoom(currentRow, currentCol).getObjects()[1]->getSprite().getPosition().y);
                     }
                 

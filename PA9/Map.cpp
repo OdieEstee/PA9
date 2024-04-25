@@ -237,7 +237,6 @@ Room Map::getRoom(int row, int col) {
 void Map::generateObjects() {
 	int choose;
 	sf::Texture* rockTexture = new sf::Texture;
-<<<<<<< HEAD
 	sf::Texture* portalTexture = new sf::Texture;
 	sf::Texture* portalBlueTexture = new sf::Texture;
 
@@ -245,11 +244,10 @@ void Map::generateObjects() {
 	rockTexture->loadFromFile("textures/Object - Rock.png");
 	portalTexture->loadFromFile("textures/Object - Portal.png");
 	portalBlueTexture->loadFromFile("textures/Object - Portal - Blue.png");
-=======
 	sf::Texture* crateTexture = new sf::Texture;
 	rockTexture->loadFromFile("textures/Object - Rock.png");
 	crateTexture->loadFromFile("textures/Object - Crate.png");
->>>>>>> d7d25a0a5d876b1dbd709f136ad6b6da00c28a3d
+
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			if (!floor[i][j].getHasStairs() && !(i == 0 && j == 2)) {
@@ -260,12 +258,12 @@ void Map::generateObjects() {
 
 					rock->setTexture(rockTexture);
 					rock->setScale(1, 1);
-<<<<<<< HEAD
+
 					rock->setPos(rand() % 1300 + 200, rand() % 400 + 100);
 					rock->setName("Rock");
-=======
+
 					rock->setPos(rand() % 1300 + 200, rand() % 400 + 200);
->>>>>>> d7d25a0a5d876b1dbd709f136ad6b6da00c28a3d
+
 					floor[i][j].pushObjects(rock);
 					
 				}
