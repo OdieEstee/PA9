@@ -1,5 +1,7 @@
 #include "Game.hpp"
 #include "BaseEnemy.hpp"
+#include "MeleeEnemy.hpp"
+#include "RangedEnemy.hpp"
 
 void Game::run() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Andy's Adventure");
@@ -26,11 +28,12 @@ void Game::run() {
     sf::Clock bulletClock;
     sf::Time bulletCooldown;
 
-    BaseEnemy enemy1(400, 400, 100, 20);
-    sf::Sprite enemySprite;
-    sf::Texture enemyTexture;
+    RangedEnemy enemy2(400, 400, 50, 10);
+    enemy2.setTextureDown();
+
+    MeleeEnemy enemy1(800, 400, 100, 20);
+    enemy1.setTextureRight();
    
-    enemySprite.setTexture(enemyTexture);
     //Game loop
     while (window.isOpen()) {
 
@@ -77,7 +80,8 @@ void Game::run() {
 
         current = map->getTexture((map->getRoom(currentRow, currentCol).getType()) - 1);
         floor.setTexture(current);
-        
+        enemy1.moveTowardsPlayer(andy);
+        enemy2.moveTowardsPlayer(andy);
         window.clear();
         window.draw(floor);
         for (Object* object : map->getRoom(currentRow, currentCol).getObjects()) {
@@ -86,7 +90,10 @@ void Game::run() {
         if (map->getRoom(currentRow, currentCol).getHasStairs()) {
             window.draw(stairs);
         }
-        window.draw(enemySprite);
+
+       /* window.draw(enemySprite);*/
+        enemy1.draw(window);
+        enemy2.draw(window);
         andy.draw(window);
         window.display();
     }

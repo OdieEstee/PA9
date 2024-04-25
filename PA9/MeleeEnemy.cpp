@@ -1,11 +1,12 @@
 #include "MeleeEnemy.hpp"
-#include "bullet.hpp"
 
 
-MeleeEnemy::MeleeEnemy(float newXPosition, float newYPosition, double enemyHealth, double enemyDamage) {
-	xVelocity = 4.f;
-	yVelocity = 4.f;
-	enemyHealth = enemyHealth;
+MeleeEnemy::MeleeEnemy(float newXPosition, float newYPosition, double enemyHealth, double enemyDamage) : BaseEnemy(newXPosition, newYPosition, enemyHealth, enemyDamage) {
+	xVelocity = 3.f;
+	yVelocity = 3.f;
+	this->enemyHealth = enemyHealth;
+	this->enemyDamage = enemyDamage;
+	playerDamageTaken = 0;
 	enemySprite.setPosition(newXPosition, newYPosition);
 }
 
@@ -51,11 +52,11 @@ void MeleeEnemy::setTextureDown() {
 }
 
 void MeleeEnemy::setEnemyHealth(double enemyHealth) {
-	enemyHealth = enemyHealth;
+	this->enemyHealth = enemyHealth;
 }
 
 void MeleeEnemy::setEnemyDamage(double enemyDamage) {
-	enemyDamage = enemyDamage;
+	this->enemyDamage = enemyDamage;
 }
 
 void MeleeEnemy::move(int offsetX, int offsetY) {
@@ -75,8 +76,8 @@ void MeleeEnemy::setEnemyPosition(float x, float y) {
 	enemySprite.setPosition(newPos);
 }
 
-void MeleeEnemy::moveTowardsPlayer(Player& player) {
-	sf::Vector2f playerPos = player.getPosition();
+void MeleeEnemy::moveTowardsPlayer(Andy& andy) {
+	sf::Vector2f playerPos = andy.getPosition();
 	float dx = playerPos.x - enemySprite.getPosition().x;
 	float dy = playerPos.y - enemySprite.getPosition().y;
 	float angle = atan2(dy, dx);

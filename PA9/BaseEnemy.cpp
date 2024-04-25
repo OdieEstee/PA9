@@ -3,7 +3,9 @@
 BaseEnemy::BaseEnemy(float newXPosition, float newYPosition, double enemyHealth, double enemyDamage) {
 	xVelocity = 4.0;
 	yVelocity = 4.0;
-	enemyHealth = enemyHealth;
+	this->enemyHealth = enemyHealth;
+	this->enemyDamage = enemyDamage;
+	playerDamageTaken = 0;
 	enemySprite.setPosition(newXPosition, newYPosition);
 }
 

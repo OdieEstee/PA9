@@ -202,6 +202,7 @@
   <ItemGroup>
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -215,6 +216,7 @@
   <ItemGroup>
     <ClInclude Include="BaseEnemy.hpp" />
     <ClInclude Include="bullet.hpp" />
+    <ClInclude Include="Fireball.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="MeleeEnemy.hpp" />
